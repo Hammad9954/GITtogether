@@ -83,46 +83,46 @@ export const Notifications = () => {
     switch (type) {
       case 'team_invitation':
       case 'team_update':
-        return <Users className="w-5 h-5 text-indigo-500" />;
+        return <Users className="w-5 h-5 text-[#B7FF5A]" />;
       case 'application_received':
       case 'application_status':
-        return <Inbox className="w-5 h-5 text-brand-500" />;
+        return <Inbox className="w-5 h-5 text-[#B7FF5A]" />;
       case 'review_received':
-        return <Star className="w-5 h-5 text-amber-500" />;
+        return <Star className="w-5 h-5 text-amber-400" />;
       case 'skill_session':
-        return <GraduationCap className="w-5 h-5 text-emerald-500" />;
+        return <GraduationCap className="w-5 h-5 text-[#B7FF5A]" />;
       default:
-        return <Bell className="w-5 h-5 text-slate-500" />;
+        return <Bell className="w-5 h-5 text-[#A1AAA0]" />;
     }
   };
 
   if (loading) {
     return (
-      <div className="py-12 text-center">
-        <Loader2 className="w-8 h-8 animate-spin text-brand-600 mx-auto" />
+      <div className="py-24 text-center">
+        <Loader2 className="w-8 h-8 animate-spin text-[#B7FF5A] mx-auto" />
       </div>
     );
   }
 
   return (
-    <div className="max-w-3xl mx-auto space-y-6 animate-fade-in py-4">
+    <div className="max-w-4xl mx-auto space-y-6 animate-fade-in py-4">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
-            <Bell className="w-6 h-6 text-brand-600 dark:text-brand-400" />
+          <h1 className="text-2xl font-extrabold text-[#F4F7F2] flex items-center gap-2.5">
+            <Bell className="w-6 h-6 text-[#B7FF5A]" />
             <span>Activity Notifications</span>
           </h1>
-          <p className="text-sm text-slate-500 dark:text-slate-400">
-            Real-time updates on applications, invitations, and team milestones
+          <p className="text-sm text-[#A1AAA0] mt-1">
+            Real-time updates on applications, invitations, and team milestones.
           </p>
         </div>
 
         {notifications.some((n) => !n.isRead) && (
           <button
             onClick={handleMarkAllRead}
-            className="inline-flex items-center gap-1 rounded-xl bg-slate-100 dark:bg-slate-800 px-3 py-1.5 text-xs font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-200"
+            className="btn-secondary inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold"
           >
-            <Check className="w-3.5 h-3.5" />
+            <Check className="w-3.5 h-3.5 text-[#B7FF5A]" />
             <span>Mark All as Read</span>
           </button>
         )}
@@ -130,51 +130,51 @@ export const Notifications = () => {
 
       <div className="space-y-3">
         {notifications.length === 0 ? (
-          <div className="p-12 text-center rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 space-y-2">
-            <Bell className="w-10 h-10 text-slate-400 mx-auto" />
-            <p className="text-sm font-semibold text-slate-600 dark:text-slate-300">
+          <div className="p-16 text-center rounded-2xl bg-[#151915] border border-[#282F28] space-y-3">
+            <Bell className="w-10 h-10 text-[#70796F] mx-auto" />
+            <p className="text-sm font-semibold text-[#F4F7F2]">
               You are all caught up!
             </p>
-            <p className="text-xs text-slate-400">No unread notifications at the moment.</p>
+            <p className="text-xs text-[#70796F]">No new notifications at the moment.</p>
           </div>
         ) : (
           notifications.map((n) => (
             <div
               key={n._id}
               onClick={() => !n.isRead && handleMarkAsRead(n._id)}
-              className={`p-4 rounded-2xl border transition-all flex items-start justify-between gap-4 ${
+              className={`p-4 sm:p-5 rounded-2xl border transition-all flex items-start justify-between gap-4 cursor-pointer ${
                 n.isRead
-                  ? 'bg-white dark:bg-slate-900 border-slate-200/80 dark:border-slate-800/80'
-                  : 'bg-brand-50/50 dark:bg-brand-950/30 border-brand-200 dark:border-brand-900/60 shadow-sm'
+                  ? 'bg-[#151915] border-[#282F28]'
+                  : 'bg-[#1B211B] border-[#B7FF5A]/40 shadow-sm shadow-[#B7FF5A]/5'
               }`}
             >
-              <div className="flex items-start gap-3">
-                <div className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 flex-shrink-0 mt-0.5">
+              <div className="flex items-start gap-3.5 min-w-0">
+                <div className="p-2.5 rounded-xl bg-[#101310] border border-[#282F28] flex-shrink-0 mt-0.5">
                   {getNotificationIcon(n.type)}
                 </div>
 
-                <div className="space-y-1">
+                <div className="space-y-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <p className="text-xs font-bold text-slate-900 dark:text-white">{n.title}</p>
+                    <p className={`text-xs font-bold truncate ${n.isRead ? 'text-[#F4F7F2]' : 'text-[#B7FF5A]'}`}>{n.title}</p>
                     {!n.isRead && (
-                      <span className="w-2 h-2 rounded-full bg-brand-600 animate-pulse" />
+                      <span className="w-2 h-2 rounded-full bg-[#B7FF5A] animate-pulse flex-shrink-0" />
                     )}
                   </div>
-                  <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                  <p className="text-xs text-[#A1AAA0] leading-relaxed">
                     {n.message}
                   </p>
-                  <p className="text-[10px] text-slate-400">
+                  <p className="text-[10px] font-mono text-[#70796F]">
                     {new Date(n.createdAt).toLocaleDateString()} at{' '}
                     {new Date(n.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 self-start">
+              <div className="flex items-center gap-2 self-start flex-shrink-0">
                 {n.link && (
                   <Link
                     to={n.link}
-                    className="text-xs font-bold text-brand-600 hover:underline whitespace-nowrap"
+                    className="text-xs font-semibold text-[#B7FF5A] hover:underline whitespace-nowrap px-2 py-1"
                   >
                     View
                   </Link>
@@ -184,7 +184,8 @@ export const Notifications = () => {
                     e.stopPropagation();
                     handleDelete(n._id);
                   }}
-                  className="p-1 text-slate-400 hover:text-rose-500 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800"
+                  className="p-1.5 text-[#70796F] hover:text-rose-400 rounded-lg hover:bg-rose-500/10 transition-colors"
+                  title="Delete notification"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
                 </button>

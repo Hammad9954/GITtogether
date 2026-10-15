@@ -7,9 +7,6 @@ import {
   ArrowRight,
   Check,
   X,
-  ExternalLink,
-  MessageSquare,
-  Shield,
   Loader2,
 } from 'lucide-react';
 import api from '../api/client.js';
@@ -94,39 +91,39 @@ export const Teams = () => {
   if (loading) {
     return (
       <div className="py-12 text-center">
-        <Loader2 className="w-8 h-8 animate-spin text-brand-600 mx-auto" />
+        <Loader2 className="w-8 h-8 animate-spin text-[#B7FF5A] mx-auto" />
       </div>
     );
   }
 
   return (
-    <div className="space-y-8 animate-fade-in py-4">
+    <div className="space-y-8 animate-fade-in py-4 max-w-6xl mx-auto px-4">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
-            <FolderGit2 className="w-7 h-7 text-brand-600 dark:text-brand-400" />
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#F4F7F2] flex items-center gap-2">
+            <FolderGit2 className="w-6 h-6 text-[#B7FF5A]" />
             <span>My Teams & Workspaces</span>
           </h1>
-          <p className="text-sm text-slate-500 dark:text-slate-400">
+          <p className="text-xs sm:text-sm text-[#A1AAA0]">
             Collaborate with your teammates, manage roles, and communicate in real-time
           </p>
         </div>
 
         <button
           onClick={() => setIsCreateOpen(true)}
-          className="inline-flex items-center gap-2 rounded-xl bg-brand-600 px-4 py-2.5 text-sm font-bold text-white shadow-md hover:bg-brand-700 transition-all self-start sm:self-auto"
+          className="btn-primary self-start sm:self-auto"
         >
-          <PlusCircle className="w-4 h-4" />
+          <PlusCircle className="w-4 h-4 stroke-[2.5]" />
           <span>Create New Team</span>
         </button>
       </div>
 
       {/* Invitations Section */}
       {invitations.length > 0 && (
-        <div className="p-6 rounded-3xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 space-y-4">
-          <h2 className="text-base font-bold text-emerald-900 dark:text-emerald-200 flex items-center gap-2">
-            <Users className="w-5 h-5 text-emerald-600" />
+        <div className="p-6 rounded-2xl bg-[#151915] border border-[#B7FF5A]/30 space-y-4">
+          <h2 className="text-sm font-bold text-[#F4F7F2] flex items-center gap-2">
+            <Users className="w-4 h-4 text-[#B7FF5A]" />
             <span>Pending Team Invitations ({invitations.length})</span>
           </h2>
 
@@ -134,41 +131,41 @@ export const Teams = () => {
             {invitations.map((inv) => (
               <div
                 key={inv._id}
-                className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-emerald-100 dark:border-emerald-900/50 shadow-sm space-y-3"
+                className="p-4 rounded-xl bg-[#101310] border border-[#282F28] space-y-3"
               >
                 <div className="flex items-start justify-between">
                   <div>
-                    <h3 className="font-bold text-sm text-slate-900 dark:text-white">
+                    <h3 className="font-bold text-sm text-[#F4F7F2]">
                       {inv.team?.name}
                     </h3>
-                    <p className="text-xs text-slate-500">
+                    <p className="text-xs text-[#70796F]">
                       Invited by {inv.inviter?.name} ({inv.inviter?.college})
                     </p>
                   </div>
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
+                  <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[#1B211B] text-[#B7FF5A] border border-[#282F28]">
                     Role: {inv.role || 'Member'}
                   </span>
                 </div>
 
                 {inv.message && (
-                  <p className="text-xs text-slate-600 dark:text-slate-300 italic">
+                  <p className="text-xs text-[#A1AAA0] italic">
                     "{inv.message}"
                   </p>
                 )}
 
-                <div className="flex items-center justify-end gap-2 pt-1 border-t border-slate-100 dark:border-slate-800">
+                <div className="flex items-center justify-end gap-2 pt-1 border-t border-[#282F28]">
                   <button
                     onClick={() => handleRespondInvitation(inv._id, 'declined')}
-                    className="inline-flex items-center gap-1 rounded-xl px-3 py-1.5 text-xs font-bold text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/40"
+                    className="inline-flex items-center gap-1 rounded-lg px-3 py-1.5 text-xs font-semibold text-rose-400 hover:bg-rose-500/10 transition-colors"
                   >
                     <X className="w-3.5 h-3.5" />
                     <span>Decline</span>
                   </button>
                   <button
                     onClick={() => handleRespondInvitation(inv._id, 'accepted')}
-                    className="inline-flex items-center gap-1 rounded-xl bg-emerald-600 px-4 py-1.5 text-xs font-bold text-white shadow hover:bg-emerald-700"
+                    className="inline-flex items-center gap-1 rounded-lg bg-[#B7FF5A] px-3.5 py-1.5 text-xs font-bold text-[#090B0A] hover:bg-[#CAFF8C] transition-colors"
                   >
-                    <Check className="w-3.5 h-3.5" />
+                    <Check className="w-3.5 h-3.5 stroke-[2.5]" />
                     <span>Accept & Join</span>
                   </button>
                 </div>
@@ -180,15 +177,15 @@ export const Teams = () => {
 
       {/* Teams Grid */}
       <div className="space-y-4">
-        <h2 className="text-lg font-bold text-slate-900 dark:text-white">Active Team Workspaces</h2>
+        <h2 className="text-base font-bold text-[#F4F7F2]">Active Team Workspaces</h2>
 
         {teams.length === 0 ? (
-          <div className="p-12 text-center rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 space-y-3">
-            <FolderGit2 className="w-12 h-12 text-slate-400 mx-auto" />
-            <h3 className="text-base font-bold text-slate-800 dark:text-slate-200">
+          <div className="p-12 text-center rounded-2xl bg-[#151915] border border-[#282F28] space-y-3">
+            <FolderGit2 className="w-10 h-10 text-[#70796F] mx-auto" />
+            <h3 className="text-base font-bold text-[#F4F7F2]">
               You are not a member of any teams yet.
             </h3>
-            <p className="text-xs text-slate-500 max-w-sm mx-auto">
+            <p className="text-xs text-[#70796F] max-w-sm mx-auto">
               Join an existing campus project or create a team to start collaborating!
             </p>
           </div>
@@ -199,38 +196,38 @@ export const Teams = () => {
               return (
                 <div
                   key={team._id}
-                  className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-soft hover:shadow-md transition-all flex flex-col justify-between"
+                  className="p-5 rounded-2xl bg-[#151915] border border-[#282F28] shadow-card hover:border-[#384238] transition-all flex flex-col justify-between"
                 >
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
                       <span
-                        className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                        className={`text-[10px] font-bold px-2 py-0.5 rounded-md border ${
                           isLeader
-                            ? 'bg-purple-100 text-purple-700 dark:bg-purple-950 dark:text-purple-300'
-                            : 'bg-brand-50 text-brand-700 dark:bg-brand-950 dark:text-brand-300'
+                            ? 'bg-[#B7FF5A]/10 text-[#B7FF5A] border-[#B7FF5A]/30'
+                            : 'bg-[#1B211B] text-[#A1AAA0] border-[#282F28]'
                         }`}
                       >
                         {isLeader ? 'TEAM LEADER' : 'MEMBER'}
                       </span>
-                      <span className="text-xs font-semibold text-slate-400">
+                      <span className="text-xs font-semibold text-[#70796F]">
                         {team.members?.length || 1} / {team.maxMembers || 5} members
                       </span>
                     </div>
 
                     <Link
                       to={`/teams/${team._id}`}
-                      className="block text-lg font-bold text-slate-900 dark:text-white hover:text-brand-600 dark:hover:text-brand-400 transition-colors truncate"
+                      className="block text-base font-bold text-[#F4F7F2] hover:text-[#B7FF5A] transition-colors truncate"
                     >
                       {team.name}
                     </Link>
 
                     {team.project && (
-                      <p className="text-xs text-brand-600 dark:text-brand-400 font-semibold truncate">
+                      <p className="text-xs text-[#B7FF5A] font-semibold truncate">
                         Project: {team.project?.title}
                       </p>
                     )}
 
-                    <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2">
+                    <p className="text-xs text-[#A1AAA0] line-clamp-2">
                       {team.description || 'Dedicated workspace for campus collaboration.'}
                     </p>
 
@@ -240,7 +237,7 @@ export const Teams = () => {
                         <div
                           key={idx}
                           title={m.role}
-                          className="h-7 w-7 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-[10px] flex items-center justify-center border border-white dark:border-slate-900 uppercase overflow-hidden"
+                          className="h-7 w-7 rounded-lg bg-[#1B211B] border border-[#282F28] text-[#B7FF5A] font-bold text-[10px] flex items-center justify-center uppercase overflow-hidden"
                         >
                           {m.user?.avatar ? (
                             <img src={m.user.avatar} alt="" className="h-full w-full object-cover" />
@@ -250,20 +247,20 @@ export const Teams = () => {
                         </div>
                       ))}
                       {(team.members || []).length > 4 && (
-                        <span className="text-[10px] font-bold text-slate-400">
+                        <span className="text-[10px] font-bold text-[#70796F]">
                           +{team.members.length - 4}
                         </span>
                       )}
                     </div>
                   </div>
 
-                  <div className="mt-5 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
-                    <span className="text-xs text-slate-400 capitalize">
-                      Status: <strong>{team.status}</strong>
+                  <div className="mt-5 pt-3 border-t border-[#282F28] flex items-center justify-between text-xs">
+                    <span className="text-[#70796F] capitalize">
+                      Status: <strong className="text-[#A1AAA0] font-medium">{team.status}</strong>
                     </span>
                     <Link
                       to={`/teams/${team._id}`}
-                      className="inline-flex items-center gap-1 text-xs font-bold text-brand-600 dark:text-brand-400 hover:underline"
+                      className="inline-flex items-center gap-1 text-xs font-bold text-[#B7FF5A] hover:underline"
                     >
                       <span>Open Workspace</span>
                       <ArrowRight className="w-3.5 h-3.5" />
@@ -280,7 +277,7 @@ export const Teams = () => {
       <Modal isOpen={isCreateOpen} onClose={() => setIsCreateOpen(false)} title="Create New Team">
         <form onSubmit={handleCreateTeam} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-xs font-semibold text-[#A1AAA0] mb-1.5">
               Team Name *
             </label>
             <input
@@ -289,12 +286,12 @@ export const Teams = () => {
               value={teamName}
               onChange={(e) => setTeamName(e.target.value)}
               placeholder="e.g. Quantum Hackers, Solar Drone Squad"
-              className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-2.5 text-sm text-slate-800 dark:text-slate-200 focus:outline-none"
+              className="input-surface"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-xs font-semibold text-[#A1AAA0] mb-1.5">
               Description & Purpose
             </label>
             <textarea
@@ -302,12 +299,12 @@ export const Teams = () => {
               value={teamDescription}
               onChange={(e) => setTeamDescription(e.target.value)}
               placeholder="What is your team building? What are the sprint goals?"
-              className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-2.5 text-sm text-slate-800 dark:text-slate-200 focus:outline-none"
+              className="input-surface resize-none"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-xs font-semibold text-[#A1AAA0] mb-1.5">
               Max Members Limit
             </label>
             <input
@@ -316,22 +313,22 @@ export const Teams = () => {
               max={20}
               value={maxMembers}
               onChange={(e) => setMaxMembers(parseInt(e.target.value, 10) || 5)}
-              className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-2.5 text-sm text-slate-800 dark:text-slate-200 focus:outline-none"
+              className="input-surface"
             />
           </div>
 
-          <div className="flex justify-end gap-2 pt-2">
+          <div className="flex justify-end gap-2.5 pt-2">
             <button
               type="button"
               onClick={() => setIsCreateOpen(false)}
-              className="rounded-xl px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100"
+              className="btn-secondary"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={creating}
-              className="rounded-xl bg-brand-600 px-5 py-2 text-xs font-bold text-white hover:bg-brand-700 disabled:opacity-50"
+              className="btn-primary"
             >
               {creating ? 'Creating...' : 'Create Team'}
             </button>

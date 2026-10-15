@@ -25,34 +25,34 @@ export const Settings = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto space-y-6 animate-fade-in py-4">
+    <div className="max-w-4xl mx-auto space-y-6 animate-fade-in py-4">
       <div>
-        <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
-          <SettingsIcon className="w-6 h-6 text-brand-600 dark:text-brand-400" />
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-[#F4F7F2] flex items-center gap-2.5">
+          <SettingsIcon className="w-7 h-7 text-[#B7FF5A]" />
           <span>Account Settings</span>
         </h1>
-        <p className="text-sm text-slate-500 dark:text-slate-400">
-          Manage your verified college credentials, privacy, and notifications
+        <p className="text-sm text-[#A1AAA0] mt-1">
+          Manage your verified college credentials, privacy settings, and session security.
         </p>
       </div>
 
       {/* College Email Status Card */}
-      <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-soft space-y-4">
-        <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-          <Mail className="w-5 h-5 text-brand-600" />
+      <div className="p-6 sm:p-8 rounded-2xl bg-[#151915] border border-[#282F28] space-y-4">
+        <h3 className="text-base font-bold text-[#F4F7F2] flex items-center gap-2">
+          <Mail className="w-5 h-5 text-[#B7FF5A]" />
           <span>College Email Verification</span>
         </h3>
 
-        <div className="flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/70 dark:border-slate-700/60">
+        <div className="flex items-center justify-between p-4 rounded-xl bg-[#101310] border border-[#282F28]">
           <div>
-            <p className="font-bold text-sm text-slate-900 dark:text-white">{user?.email}</p>
-            <p className="text-xs text-slate-500">
-              Campus Affiliation: {user?.college || 'University Student'}
+            <p className="font-bold text-sm text-[#F4F7F2]">{user?.email}</p>
+            <p className="text-xs text-[#70796F] mt-0.5">
+              Campus Affiliation: <span className="text-[#A1AAA0]">{user?.college || 'University Student'}</span>
             </p>
           </div>
 
           {user?.isVerified ? (
-            <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 text-xs font-bold">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#B7FF5A]/10 text-[#B7FF5A] border border-[#B7FF5A]/20 text-xs font-mono font-bold">
               <CheckCircle2 className="w-4 h-4" />
               <span>Verified .edu</span>
             </span>
@@ -60,7 +60,7 @@ export const Settings = () => {
             <button
               onClick={handleResendVerification}
               disabled={resending}
-              className="rounded-xl bg-brand-600 px-3.5 py-1.5 text-xs font-bold text-white hover:bg-brand-700 disabled:opacity-50"
+              className="btn-primary px-4 py-1.5 text-xs font-semibold disabled:opacity-50"
             >
               {resending ? 'Sending...' : 'Verify Now'}
             </button>
@@ -69,24 +69,25 @@ export const Settings = () => {
       </div>
 
       {/* Security & Access */}
-      <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-soft space-y-4">
-        <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-          <ShieldCheck className="w-5 h-5 text-indigo-600" />
+      <div className="p-6 sm:p-8 rounded-2xl bg-[#151915] border border-[#282F28] space-y-4">
+        <h3 className="text-base font-bold text-[#F4F7F2] flex items-center gap-2">
+          <ShieldCheck className="w-5 h-5 text-[#B7FF5A]" />
           <span>Security & Authorization</span>
         </h3>
 
-        <div className="text-xs text-slate-600 dark:text-slate-300 space-y-2">
-          <p>
-            <strong>Role:</strong> <span className="capitalize">{user?.role}</span>
-          </p>
-          <p>
-            <strong>Account Status:</strong>{' '}
-            <span className="text-emerald-600 font-bold">Active & Good Standing</span>
-          </p>
-          <p>
-            <strong>Session Security:</strong> Protected by HTTP-only authenticated cookie encryption
-            and Bcrypt hashing.
-          </p>
+        <div className="text-xs text-[#A1AAA0] space-y-3 bg-[#101310] border border-[#282F28] p-4 rounded-xl">
+          <div className="flex items-center justify-between border-b border-[#282F28]/60 pb-2.5">
+            <span className="text-[#70796F]">Platform Role:</span>
+            <span className="capitalize font-mono font-bold text-[#F4F7F2] bg-[#1B211B] px-2.5 py-0.5 rounded border border-[#282F28]">{user?.role}</span>
+          </div>
+          <div className="flex items-center justify-between border-b border-[#282F28]/60 pb-2.5">
+            <span className="text-[#70796F]">Account Status:</span>
+            <span className="text-[#B7FF5A] font-mono font-bold">Active & Good Standing</span>
+          </div>
+          <div className="pt-0.5 text-[#70796F] leading-relaxed">
+            <span className="text-[#A1AAA0] font-medium">Session Security: </span>
+            Protected by HTTP-only authenticated cookie encryption and Bcrypt salt hashing on all credentials.
+          </div>
         </div>
       </div>
     </div>

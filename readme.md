@@ -195,15 +195,17 @@ npm.cmd run seed
 npm run seed
 ```
 
-### 3. Run Development Servers
-Start both backend (port 5000) and frontend (port 5173) together:
+### 3. Run Entire Application (One Single Command)
+Start both backend (port 5000) and frontend (port 5173) simultaneously. If running for the first time, demo accounts, campus projects, and hackathons will automatically be seeded into the database:
 
 ```bash
 # Windows
-npm.cmd run dev
+npm.cmd start
+# (or: npm.cmd run dev)
 
 # macOS / Linux
-npm run dev
+npm start
+# (or: npm run dev)
 ```
 
 Visit **`http://localhost:5173`** in your browser.
@@ -216,8 +218,9 @@ All scripts can be invoked directly from the root repository:
 
 | Command | Action |
 |---|---|
-| `npm run setup` | Installs root, backend, and frontend dependencies |
+| `npm start` | **Runs the entire application in one command** (backend + frontend concurrently with auto-seed) |
 | `npm run dev` | Runs backend (`localhost:5000`) and frontend (`localhost:5173`) concurrently |
+| `npm run setup` | Installs root, backend, and frontend dependencies |
 | `npm run dev:backend` | Starts backend in hot-reload mode via nodemon |
 | `npm run dev:frontend`| Starts frontend Vite development server |
 | `npm run seed` | Seeds realistic demo data into the configured database |
@@ -389,6 +392,3 @@ All endpoints return a uniform JSON structure:
    - `COOKIE_SECRET=<strong-random-32-byte-hex-string>`
 
 ---
-
-## 📄 License
-MIT License. Built for university student teams, campus hackathons, and open-source collaboration.

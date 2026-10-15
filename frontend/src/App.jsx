@@ -34,10 +34,10 @@ export const ProtectedRoute = ({ children }) => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950">
+      <div className="min-h-screen flex items-center justify-center bg-[#090B0A]">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 border-4 border-brand-600 border-t-transparent rounded-full animate-spin"></div>
-          <p className="text-sm font-medium text-slate-500">Checking authentication...</p>
+          <div className="w-10 h-10 border-2 border-[#B7FF5A] border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-sm font-medium text-[#A1AAA0]">Checking authentication...</p>
         </div>
       </div>
     );
@@ -56,8 +56,8 @@ export const AdminRoute = ({ children }) => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950">
-        <div className="w-10 h-10 border-4 border-brand-600 border-t-transparent rounded-full animate-spin"></div>
+      <div className="min-h-screen flex items-center justify-center bg-[#090B0A]">
+        <div className="w-10 h-10 border-2 border-[#B7FF5A] border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }

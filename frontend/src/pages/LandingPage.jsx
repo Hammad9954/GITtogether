@@ -10,6 +10,10 @@ import {
   GraduationCap,
   MessageSquare,
   CheckCircle2,
+  Terminal,
+  Code2,
+  Cpu,
+  Layers,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext.jsx';
 
@@ -17,47 +21,51 @@ export const LandingPage = () => {
   const { user } = useAuth();
 
   return (
-    <div className="space-y-16 py-6 sm:py-12 animate-fade-in">
+    <div className="space-y-20 py-8 sm:py-16 animate-fade-in max-w-6xl mx-auto">
       {/* Hero Section */}
-      <section className="relative text-center max-w-4xl mx-auto space-y-6">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-50 border border-brand-200/80 text-brand-700 dark:bg-brand-950/60 dark:border-brand-800 dark:text-brand-300 text-xs font-semibold">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>The Campus Team Formation Engine</span>
+      <section className="relative text-center space-y-6 max-w-4xl mx-auto px-4">
+        {/* Campus announcement pill */}
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#151915] border border-[#282F28] text-xs font-medium text-[#A1AAA0]">
+          <span className="flex h-2 w-2 rounded-full bg-[#B7FF5A] animate-pulse" />
+          <span className="text-[#F4F7F2] font-semibold">Git Together v2.0</span>
+          <span className="text-[#70796F]">|</span>
+          <span className="text-[#A1AAA0]">Campus Team Formation & Collaboration Engine</span>
         </div>
 
-        <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.15]">
+        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#F4F7F2] leading-[1.1]">
           Find your people. <br />
-          <span className="bg-gradient-to-r from-brand-600 via-indigo-600 to-blue-500 bg-clip-text text-transparent">
+          <span className="text-[#B7FF5A]">
             Build something great.
           </span>
         </h1>
 
-        <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed">
-          Git Together connects ambitious college students by matching complementary skills, project
-          passions, and hackathon ambitions using explainable compatibility scores.
+        <p className="text-base sm:text-lg text-[#A1AAA0] max-w-2xl mx-auto leading-relaxed">
+          The developer-focused platform connecting ambitious university students to build hackathon
+          squads, open source tools, and startup MVPs with explainable 0–100 compatibility matching.
         </p>
 
-        <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
+        {/* CTA Buttons */}
+        <div className="flex flex-wrap items-center justify-center gap-3 pt-3">
           {user ? (
             <Link
               to="/dashboard"
-              className="inline-flex items-center gap-2 rounded-2xl bg-brand-600 px-6 py-3.5 text-base font-bold text-white shadow-lg shadow-brand-500/25 hover:bg-brand-700 transition-all hover:scale-[1.02]"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#B7FF5A] px-6 py-3 text-sm font-bold text-[#090B0A] hover:bg-[#CAFF8C] transition-all duration-150 shadow-sm"
             >
-              <span>Go to Your Dashboard</span>
-              <ArrowRight className="w-5 h-5" />
+              <span>Go to Your Workspace</span>
+              <ArrowRight className="w-4 h-4 stroke-[2.5]" />
             </Link>
           ) : (
             <>
               <Link
                 to="/register"
-                className="inline-flex items-center gap-2 rounded-2xl bg-brand-600 px-6 py-3.5 text-base font-bold text-white shadow-lg shadow-brand-500/25 hover:bg-brand-700 transition-all hover:scale-[1.02]"
+                className="inline-flex items-center gap-2 rounded-xl bg-[#B7FF5A] px-6 py-3 text-sm font-bold text-[#090B0A] hover:bg-[#CAFF8C] transition-all duration-150 shadow-sm"
               >
                 <span>Join with College Email</span>
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="w-4 h-4 stroke-[2.5]" />
               </Link>
               <Link
                 to="/login"
-                className="inline-flex items-center gap-2 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 px-6 py-3.5 text-base font-bold text-slate-800 dark:text-slate-200 shadow-sm hover:bg-slate-50 dark:hover:bg-slate-800 transition-all"
+                className="inline-flex items-center gap-2 rounded-xl bg-[#151915] border border-[#282F28] px-5 py-3 text-sm font-semibold text-[#F4F7F2] hover:bg-[#1B211B] hover:border-[#384238] transition-all"
               >
                 <span>Sign In Demo</span>
               </Link>
@@ -65,84 +73,203 @@ export const LandingPage = () => {
           )}
         </div>
 
-        {/* Feature Pills */}
-        <div className="flex flex-wrap justify-center gap-6 pt-4 text-xs font-medium text-slate-500 dark:text-slate-400">
+        {/* Feature Checkpoints */}
+        <div className="flex flex-wrap items-center justify-center gap-6 pt-4 text-xs text-[#70796F]">
           <div className="flex items-center gap-1.5">
-            <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-            <span>Verified .edu student profiles</span>
+            <CheckCircle2 className="w-3.5 h-3.5 text-[#B7FF5A]" />
+            <span className="text-[#A1AAA0]">Verified .edu profiles</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-            <span>Explainable 0–100% skill matching</span>
+            <CheckCircle2 className="w-3.5 h-3.5 text-[#B7FF5A]" />
+            <span className="text-[#A1AAA0]">Explainable skill-based matching</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-            <span>Real-time Socket.IO workspaces</span>
+            <CheckCircle2 className="w-3.5 h-3.5 text-[#B7FF5A]" />
+            <span className="text-[#A1AAA0]">Real-time collaboration workspaces</span>
           </div>
         </div>
       </section>
 
-      {/* Feature Highlights Grid */}
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
-        <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-soft space-y-3">
-          <div className="w-12 h-12 rounded-xl bg-brand-50 dark:bg-brand-950/60 text-brand-600 dark:text-brand-400 flex items-center justify-center">
-            <Compass className="w-6 h-6" />
+      {/* Product Preview Mockup Window */}
+      <section className="relative px-4">
+        <div className="rounded-2xl border border-[#282F28] bg-[#101310] overflow-hidden shadow-elevated">
+          {/* Top Window Bar */}
+          <div className="flex items-center justify-between px-4 py-3 bg-[#151915] border-b border-[#282F28]">
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded-full bg-[#282F28]" />
+              <div className="w-3 h-3 rounded-full bg-[#282F28]" />
+              <div className="w-3 h-3 rounded-full bg-[#282F28]" />
+              <span className="text-xs text-[#70796F] font-mono ml-2">gittogether.campus.internal/workspace</span>
+            </div>
+            <div className="flex items-center gap-2 text-xs text-[#A1AAA0]">
+              <span className="flex h-2 w-2 rounded-full bg-[#B7FF5A]" />
+              <span className="font-mono text-[11px]">MATCH_ENGINE_ONLINE</span>
+            </div>
           </div>
-          <h3 className="text-lg font-bold text-slate-900 dark:text-white">Discover Projects</h3>
-          <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-            Browse real campus projects across AI, Web, Mobile, and IoT. Filter by required skills
-            and open positions, and pitch to join in one click.
+
+          {/* Interactive Preview Content */}
+          <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* Project Card Preview */}
+            <div className="rounded-xl border border-[#282F28] bg-[#151915] p-5 space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#1B211B] text-[#B7FF5A] border border-[#282F28]">
+                  AI / Systems
+                </span>
+                <span className="text-xs font-semibold text-[#B7FF5A] border border-[#B7FF5A]/30 bg-[#B7FF5A]/10 px-2 py-0.5 rounded-full">
+                  94% Match
+                </span>
+              </div>
+              <h3 className="font-bold text-sm text-[#F4F7F2]">Distributed Vector Search Engine</h3>
+              <p className="text-xs text-[#A1AAA0] line-clamp-2">
+                High-throughput nearest neighbor retrieval cluster written in Rust and Go with SIMD optimizations.
+              </p>
+              <div className="flex flex-wrap gap-1.5 pt-1">
+                {['Rust', 'Go', 'Raft', 'gRPC'].map((tag) => (
+                  <span key={tag} className="px-2 py-0.5 rounded text-[10px] bg-[#1B211B] text-[#70796F]">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <div className="pt-2 border-t border-[#282F28] flex items-center justify-between text-xs text-[#70796F]">
+                <span>2 open positions</span>
+                <span className="text-[#F4F7F2] font-semibold">Team of 3/5</span>
+              </div>
+            </div>
+
+            {/* Teammate Synergy Preview */}
+            <div className="rounded-xl border border-[#282F28] bg-[#151915] p-5 space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="h-8 w-8 rounded-lg bg-[#1B211B] border border-[#282F28] text-[#B7FF5A] flex items-center justify-center font-bold text-xs">
+                    P
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold text-[#F4F7F2]">Priya Sharma</h4>
+                    <p className="text-[10px] text-[#70796F]">Stanford University • Junior</p>
+                  </div>
+                </div>
+                <span className="text-xs font-semibold text-[#B7FF5A] border border-[#B7FF5A]/30 bg-[#B7FF5A]/10 px-2 py-0.5 rounded-full">
+                  91% Match
+                </span>
+              </div>
+              <div className="p-2.5 rounded-lg bg-[#101310] border border-[#282F28] space-y-1 text-xs">
+                <div className="text-[11px] font-semibold text-[#F4F7F2] flex items-center gap-1">
+                  <Sparkles className="w-3 h-3 text-[#B7FF5A]" />
+                  <span>Explainable Synergy</span>
+                </div>
+                <p className="text-[11px] text-[#A1AAA0]">
+                  Complements your Frontend skills with Deep Learning & PyTorch. Shared 15h/wk hackathon availability.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {['PyTorch', 'FastAPI', 'MLOps'].map((tag) => (
+                  <span key={tag} className="px-2 py-0.5 rounded text-[10px] bg-[#1B211B] text-[#70796F]">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Real-time Collaboration Preview */}
+            <div className="rounded-xl border border-[#282F28] bg-[#151915] p-5 space-y-3 flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs font-bold text-[#F4F7F2] flex items-center gap-1.5">
+                    <MessageSquare className="w-3.5 h-3.5 text-[#B7FF5A]" />
+                    <span>Squad Chat</span>
+                  </span>
+                  <span className="flex items-center gap-1 text-[10px] text-[#B7FF5A]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#B7FF5A]" /> Live
+                  </span>
+                </div>
+                <div className="space-y-2 text-xs">
+                  <div className="p-2 rounded-lg bg-[#101310] border border-[#282F28]">
+                    <span className="font-semibold text-[#B7FF5A] text-[11px]">Alex: </span>
+                    <span className="text-[#A1AAA0] text-[11px]">Pushed the GraphQL schema and WebSocket router. Ready for code review!</span>
+                  </div>
+                  <div className="p-2 rounded-lg bg-[#1B211B] border border-[#282F28]">
+                    <span className="font-semibold text-[#F4F7F2] text-[11px]">Elena: </span>
+                    <span className="text-[#A1AAA0] text-[11px]">Reviewing now. Running benchmarks against our demo cluster.</span>
+                  </div>
+                </div>
+              </div>
+              <div className="pt-2 border-t border-[#282F28] flex items-center justify-between text-xs text-[#70796F]">
+                <span>Hackathon: MIT TechX 2026</span>
+                <span className="text-[#B7FF5A] font-semibold">Squad Ready</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Feature Sections */}
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-5 px-4">
+        <div className="p-6 rounded-2xl bg-[#151915] border border-[#282F28] space-y-3 hover:border-[#384238] transition-colors">
+          <div className="w-10 h-10 rounded-xl bg-[#1B211B] border border-[#282F28] text-[#B7FF5A] flex items-center justify-center">
+            <Compass className="w-5 h-5" />
+          </div>
+          <h3 className="text-base font-bold text-[#F4F7F2]">Discover Real Projects</h3>
+          <p className="text-xs text-[#A1AAA0] leading-relaxed">
+            Search active college projects across AI, Web, Mobile, Systems, and Robotics. Filter by required skills and pitch your involvement in one click.
           </p>
         </div>
 
-        <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-soft space-y-3">
-          <div className="w-12 h-12 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
-            <Sparkles className="w-6 h-6" />
+        <div className="p-6 rounded-2xl bg-[#151915] border border-[#282F28] space-y-3 hover:border-[#384238] transition-colors">
+          <div className="w-10 h-10 rounded-xl bg-[#1B211B] border border-[#282F28] text-[#B7FF5A] flex items-center justify-center">
+            <Sparkles className="w-5 h-5" />
           </div>
-          <h3 className="text-lg font-bold text-slate-900 dark:text-white">Explainable Matching</h3>
-          <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-            No black-box guesses. Our deterministic matching engine calculates a transparent 0–100%
-            compatibility score showing the exact synergy reasons.
+          <h3 className="text-base font-bold text-[#F4F7F2]">Explainable Matching</h3>
+          <p className="text-xs text-[#A1AAA0] leading-relaxed">
+            Transparent 0–100% compatibility scores reveal exactly why students match—balancing skill overlap, complementary strengths, and time commitments.
           </p>
         </div>
 
-        <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-soft space-y-3">
-          <div className="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center">
-            <Trophy className="w-6 h-6" />
+        <div className="p-6 rounded-2xl bg-[#151915] border border-[#282F28] space-y-3 hover:border-[#384238] transition-colors">
+          <div className="w-10 h-10 rounded-xl bg-[#1B211B] border border-[#282F28] text-[#B7FF5A] flex items-center justify-center">
+            <Trophy className="w-5 h-5" />
           </div>
-          <h3 className="text-lg font-bold text-slate-900 dark:text-white">Hackathons & Teams</h3>
-          <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-            Register for top collegiate hackathons, form multi-disciplinary squads, assign team roles,
-            and collaborate in shared real-time chat rooms.
+          <h3 className="text-base font-bold text-[#F4F7F2]">Hackathons & Team Rooms</h3>
+          <p className="text-xs text-[#A1AAA0] leading-relaxed">
+            Register your team for premier collegiate hackathons, assign responsibilities, and collaborate via authenticated real-time Socket.IO chat rooms.
           </p>
         </div>
       </section>
 
-      {/* Peer Skill Sharing Banner */}
-      <section className="rounded-3xl bg-gradient-to-br from-brand-900 via-navy-900 to-slate-950 text-white p-8 sm:p-12 relative overflow-hidden shadow-xl">
-        <div className="max-w-2xl space-y-4 relative z-10">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-brand-200 text-xs font-semibold backdrop-blur-sm">
-            <GraduationCap className="w-3.5 h-3.5" />
-            <span>Peer-to-Peer Learning</span>
-          </div>
-          <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight">
-            Learn from peers. Share what you know.
-          </h2>
-          <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-            Request 1-on-1 mentorship sessions with upperclassmen or peer developers on topics like
-            PyTorch, React, Figma auto-layouts, or low-level systems. Earn reputation score for teaching.
-          </p>
-          <div className="pt-2">
-            <Link
-              to={user ? '/skill-sharing' : '/register'}
-              className="inline-flex items-center gap-2 rounded-xl bg-white text-slate-900 px-5 py-2.5 text-sm font-bold shadow hover:bg-slate-100 transition-all"
-            >
-              <span>Explore Skill Sessions</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+      {/* Peer Skill Sharing Card */}
+      <section className="px-4">
+        <div className="rounded-2xl bg-[#101310] border border-[#282F28] p-8 sm:p-10 relative overflow-hidden">
+          <div className="max-w-2xl space-y-4 relative z-10">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1B211B] text-[#B7FF5A] border border-[#282F28] text-xs font-semibold">
+              <GraduationCap className="w-3.5 h-3.5" />
+              <span>Peer-to-Peer Learning</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#F4F7F2]">
+              Learn from peers. Share what you know.
+            </h2>
+            <p className="text-xs sm:text-sm text-[#A1AAA0] leading-relaxed">
+              Book 1-on-1 skill exchange sessions with upperclassmen or peer developers on topics like PyTorch, Next.js, systems architecture, or low-level performance tuning. Earn reputation boosts for teaching.
+            </p>
+            <div className="pt-2">
+              <Link
+                to={user ? '/skill-sharing' : '/register'}
+                className="inline-flex items-center gap-2 rounded-xl bg-[#B7FF5A] text-[#090B0A] px-5 py-2.5 text-xs font-bold hover:bg-[#CAFF8C] transition-all"
+              >
+                <span>Explore Skill Sessions</span>
+                <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className="pt-8 border-t border-[#282F28] px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#70796F]">
+        <div className="flex items-center gap-2">
+          <span className="font-bold text-[#F4F7F2]">Git<span className="text-[#B7FF5A]">Together</span></span>
+          <span>— Find your people. Build something great.</span>
+        </div>
+        <p>© 2026 Git Together. Built for student innovators.</p>
+      </footer>
     </div>
   );
 };

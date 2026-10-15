@@ -157,39 +157,40 @@ export const Messages = () => {
   });
 
   return (
-    <div className="space-y-4 animate-fade-in py-2">
+    <div className="space-y-4 animate-fade-in py-2 max-w-7xl mx-auto">
       <div>
-        <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
-          <MessageSquare className="w-6 h-6 text-brand-600 dark:text-brand-400" />
+        <h1 className="text-2xl font-extrabold text-[#F4F7F2] flex items-center gap-2.5">
+          <MessageSquare className="w-6 h-6 text-[#B7FF5A]" />
           <span>Messages & Channels</span>
         </h1>
+        <p className="text-xs text-[#70796F] mt-1">Real-time collaboration with teammates, peers, and project squads.</p>
       </div>
 
-      <div className="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-soft overflow-hidden grid grid-cols-1 md:grid-cols-3 h-[650px]">
+      <div className="rounded-2xl bg-[#151915] border border-[#282F28] overflow-hidden grid grid-cols-1 md:grid-cols-3 h-[680px]">
         {/* Left Column: Conversations List */}
-        <div className="border-r border-slate-100 dark:border-slate-800 flex flex-col h-full bg-slate-50/50 dark:bg-slate-950/40">
+        <div className="border-r border-[#282F28] flex flex-col h-full bg-[#101310]">
           {/* Search bar */}
-          <div className="p-3 border-b border-slate-100 dark:border-slate-800">
+          <div className="p-3 border-b border-[#282F28]">
             <div className="relative">
-              <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-2.5" />
+              <Search className="w-3.5 h-3.5 text-[#70796F] absolute left-3 top-2.5" />
               <input
                 type="text"
                 value={searchFilter}
                 onChange={(e) => setSearchFilter(e.target.value)}
                 placeholder="Search conversations..."
-                className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 pl-8 pr-3 py-1.5 text-xs text-slate-800 dark:text-slate-200 focus:outline-none"
+                className="input-surface w-full pl-8 pr-3 py-1.5 text-xs rounded-xl"
               />
             </div>
           </div>
 
           {/* Conversation List */}
-          <div className="flex-1 overflow-y-auto divide-y divide-slate-100 dark:divide-slate-800/60">
+          <div className="flex-1 overflow-y-auto divide-y divide-[#282F28]/50">
             {loading ? (
-              <div className="p-6 text-center">
-                <Loader2 className="w-5 h-5 animate-spin text-slate-400 mx-auto" />
+              <div className="p-8 text-center">
+                <Loader2 className="w-5 h-5 animate-spin text-[#B7FF5A] mx-auto" />
               </div>
             ) : filteredConversations.length === 0 ? (
-              <p className="p-6 text-xs text-slate-400 text-center">No conversations found.</p>
+              <p className="p-6 text-xs text-[#70796F] text-center">No conversations found.</p>
             ) : (
               filteredConversations.map((conv) => {
                 const isSelected = activeConversation?._id === conv._id;
@@ -203,14 +204,14 @@ export const Messages = () => {
                     onClick={() => setActiveConversation(conv)}
                     className={`w-full text-left p-3.5 flex items-center gap-3 transition-colors ${
                       isSelected
-                        ? 'bg-brand-50/80 dark:bg-brand-950/50'
-                        : 'hover:bg-slate-100/70 dark:hover:bg-slate-800/50'
+                        ? 'bg-[#1B211B] border-l-2 border-[#B7FF5A]'
+                        : 'hover:bg-[#151915] border-l-2 border-transparent'
                     }`}
                   >
                     <div className="relative flex-shrink-0">
-                      <div className="h-10 w-10 rounded-2xl bg-brand-100 dark:bg-brand-900 text-brand-700 dark:text-brand-300 font-bold text-xs flex items-center justify-center uppercase overflow-hidden">
+                      <div className="h-10 w-10 rounded-xl bg-[#151915] border border-[#282F28] text-[#B7FF5A] font-bold text-xs flex items-center justify-center uppercase overflow-hidden">
                         {conv.type === 'team' ? (
-                          <Users className="w-4 h-4" />
+                          <Users className="w-4 h-4 text-[#B7FF5A]" />
                         ) : other?.avatar ? (
                           <img src={other.avatar} alt="" className="h-full w-full object-cover" />
                         ) : (
@@ -218,22 +219,22 @@ export const Messages = () => {
                         )}
                       </div>
                       {isOnline && (
-                        <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-white dark:border-slate-900" />
+                        <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-[#B7FF5A] border-2 border-[#101310]" />
                       )}
                     </div>
 
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between">
-                        <p className="text-xs font-bold text-slate-900 dark:text-white truncate">
+                        <p className={`text-xs font-bold truncate ${isSelected ? 'text-[#B7FF5A]' : 'text-[#F4F7F2]'}`}>
                           {title}
                         </p>
                         {conv.lastMessageAt && (
-                          <span className="text-[10px] text-slate-400">
+                          <span className="text-[10px] font-mono text-[#70796F]">
                             {new Date(conv.lastMessageAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                           </span>
                         )}
                       </div>
-                      <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate mt-0.5">
+                      <p className="text-[11px] text-[#A1AAA0] truncate mt-0.5">
                         {conv.lastMessage?.content || (conv.type === 'team' ? 'Team channel' : 'Direct message')}
                       </p>
                     </div>
@@ -245,37 +246,37 @@ export const Messages = () => {
         </div>
 
         {/* Right Column: Chat Window */}
-        <div className="md:col-span-2 flex flex-col h-full bg-white dark:bg-slate-900">
+        <div className="md:col-span-2 flex flex-col h-full bg-[#151915]">
           {activeConversation ? (
             <>
               {/* Active Conversation Header */}
-              <div className="p-3.5 px-5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-slate-50/40 dark:bg-slate-800/30">
+              <div className="p-3.5 px-5 border-b border-[#282F28] flex items-center justify-between bg-[#101310]">
                 <div className="flex items-center gap-3">
-                  <div className="h-9 w-9 rounded-xl bg-brand-600 text-white font-bold text-xs flex items-center justify-center uppercase">
+                  <div className="h-9 w-9 rounded-xl bg-[#1B211B] border border-[#282F28] text-[#B7FF5A] font-bold text-xs flex items-center justify-center uppercase">
                     {getConversationTitle(activeConversation).charAt(0)}
                   </div>
                   <div>
-                    <h3 className="font-bold text-sm text-slate-900 dark:text-white">
+                    <h3 className="font-bold text-sm text-[#F4F7F2]">
                       {getConversationTitle(activeConversation)}
                     </h3>
-                    <p className="text-[11px] text-slate-400">
+                    <p className="text-[11px] text-[#70796F]">
                       {activeConversation.type === 'team'
                         ? `${activeConversation.participants?.length || 0} participants in team channel`
-                        : 'Encrypted peer conversation'}
+                        : 'Direct encrypted peer conversation'}
                     </p>
                   </div>
                 </div>
               </div>
 
               {/* Messages Feed */}
-              <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-3">
+              <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-3.5 bg-[#090B0A]/60">
                 {loadingMessages ? (
                   <div className="h-full flex items-center justify-center">
-                    <Loader2 className="w-6 h-6 animate-spin text-slate-400" />
+                    <Loader2 className="w-6 h-6 animate-spin text-[#B7FF5A]" />
                   </div>
                 ) : messages.length === 0 ? (
-                  <div className="h-full flex items-center justify-center text-center text-slate-400 text-xs">
-                    <p>No messages here yet. Break the ice!</p>
+                  <div className="h-full flex items-center justify-center text-center text-[#70796F] text-xs">
+                    <p>No messages here yet. Say hello and break the ice!</p>
                   </div>
                 ) : (
                   messages.map((msg) => {
@@ -287,25 +288,25 @@ export const Messages = () => {
                           isMy ? 'ml-auto flex-row-reverse' : ''
                         }`}
                       >
-                        <div className="h-7 w-7 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold text-[10px] flex items-center justify-center uppercase flex-shrink-0">
+                        <div className="h-7 w-7 rounded-full bg-[#1B211B] border border-[#282F28] text-[#B7FF5A] font-bold text-[10px] flex items-center justify-center uppercase flex-shrink-0">
                           {msg.sender?.name?.charAt(0)}
                         </div>
                         <div className="space-y-1">
                           <div
-                            className={`flex items-center gap-2 text-[10px] text-slate-400 ${
+                            className={`flex items-center gap-2 text-[10px] text-[#70796F] ${
                               isMy ? 'justify-end' : ''
                             }`}
                           >
-                            <span className="font-semibold text-slate-700 dark:text-slate-300">
+                            <span className="font-semibold text-[#A1AAA0]">
                               {isMy ? 'You' : msg.sender?.name}
                             </span>
-                            <span>{new Date(msg.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                            <span className="font-mono text-[9px]">{new Date(msg.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                           </div>
                           <div
                             className={`p-3 rounded-2xl text-xs leading-relaxed ${
                               isMy
-                                ? 'bg-brand-600 text-white rounded-tr-none'
-                                : 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 rounded-tl-none'
+                                ? 'bg-[#B7FF5A] text-[#090B0A] font-medium rounded-tr-none'
+                                : 'bg-[#1B211B] border border-[#282F28] text-[#F4F7F2] rounded-tl-none'
                             }`}
                           >
                             {msg.content}
@@ -320,34 +321,36 @@ export const Messages = () => {
 
               {/* Typing indicator */}
               {typingName && (
-                <div className="px-5 py-1 text-[11px] text-slate-400 italic">
-                  {typingName} is typing...
+                <div className="px-5 py-1.5 text-[11px] text-[#A1AAA0] italic bg-[#101310] border-t border-[#282F28]/50 flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#B7FF5A] animate-ping" />
+                  <span>{typingName} is typing...</span>
                 </div>
               )}
 
               {/* Message Composer */}
               <form
                 onSubmit={handleSendMessage}
-                className="p-3 border-t border-slate-100 dark:border-slate-800 flex items-center gap-2 bg-slate-50/30 dark:bg-slate-800/20"
+                className="p-3 border-t border-[#282F28] flex items-center gap-2 bg-[#101310]"
               >
                 <input
                   type="text"
                   value={newMessage}
                   onChange={handleTyping}
                   placeholder="Type your message..."
-                  className="flex-1 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-3.5 py-2.5 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                  className="flex-1 input-surface px-4 py-2.5 text-xs rounded-xl"
                 />
                 <button
                   type="submit"
                   disabled={!newMessage.trim()}
-                  className="rounded-xl bg-brand-600 p-2.5 text-white hover:bg-brand-700 transition-colors disabled:opacity-50"
+                  className="btn-primary p-2.5 text-[#090B0A] rounded-xl disabled:opacity-50 transition-colors"
+                  title="Send Message"
                 >
                   <Send className="w-4 h-4" />
                 </button>
               </form>
             </>
           ) : (
-            <div className="h-full flex items-center justify-center text-slate-400 text-xs">
+            <div className="h-full flex items-center justify-center text-[#70796F] text-xs">
               <p>Select a conversation from the left to start chatting</p>
             </div>
           )}

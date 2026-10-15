@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Star, MessageSquare, PlusCircle, CheckCircle2, Loader2, Sparkles } from 'lucide-react';
+import { Star, MessageSquare, PlusCircle, CheckCircle2, Loader2, Sparkles, Shield } from 'lucide-react';
 import api from '../api/client.js';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useToast } from '../context/ToastContext.jsx';
@@ -111,8 +111,8 @@ export const Reviews = () => {
 
   if (loading) {
     return (
-      <div className="py-12 text-center">
-        <Loader2 className="w-8 h-8 animate-spin text-brand-600 mx-auto" />
+      <div className="py-24 text-center">
+        <Loader2 className="w-8 h-8 animate-spin text-[#B7FF5A] mx-auto" />
       </div>
     );
   }
@@ -122,18 +122,18 @@ export const Reviews = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
-            <Star className="w-7 h-7 text-amber-500 fill-amber-500" />
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#F4F7F2] flex items-center gap-2.5">
+            <Star className="w-7 h-7 text-amber-400 fill-amber-400" />
             <span>Peer Reviews & Trust Score</span>
           </h1>
-          <p className="text-sm text-slate-500 dark:text-slate-400">
-            Transparent evaluations from student teammates after collaborative project milestones
+          <p className="text-sm text-[#A1AAA0] mt-1">
+            Transparent evaluations from student teammates after collaborative project milestones.
           </p>
         </div>
 
         <button
           onClick={() => setIsModalOpen(true)}
-          className="inline-flex items-center gap-2 rounded-xl bg-brand-600 px-4 py-2.5 text-sm font-bold text-white shadow-md hover:bg-brand-700 transition-all self-start sm:self-auto"
+          className="btn-primary inline-flex items-center gap-2 px-4 py-2.5 text-xs font-semibold self-start sm:self-auto"
         >
           <PlusCircle className="w-4 h-4" />
           <span>Write a Peer Review</span>
@@ -141,52 +141,55 @@ export const Reviews = () => {
       </div>
 
       {/* Summary Scorecard */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-soft flex flex-col sm:flex-row sm:items-center justify-between gap-6">
-        <div className="flex items-center gap-5">
+      <div className="p-6 sm:p-8 rounded-2xl bg-[#151915] border border-[#282F28] flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+        <div className="flex items-center gap-6">
           <div className="text-center sm:text-left">
-            <p className="text-4xl font-black text-slate-900 dark:text-white">
+            <p className="text-4xl font-mono font-black text-[#F4F7F2]">
               {(stats.avgRating || 5).toFixed(1)}
             </p>
-            <StarRating value={Math.round(stats.avgRating || 5)} size="sm" />
-            <p className="text-xs text-slate-400 mt-1">Based on {stats.total || reviews.length} reviews</p>
+            <div className="my-1">
+              <StarRating value={Math.round(stats.avgRating || 5)} size="sm" />
+            </div>
+            <p className="text-xs font-mono text-[#70796F]">Based on {stats.total || reviews.length} reviews</p>
           </div>
 
-          <div className="border-l border-slate-100 dark:border-slate-800 pl-5 text-xs space-y-1.5 text-slate-500">
+          <div className="border-l border-[#282F28] pl-6 text-xs space-y-1.5">
             <div className="flex items-center gap-2">
-              <span className="font-semibold text-slate-700 dark:text-slate-300">Collaboration:</span>
-              <span className="font-bold text-emerald-600">{(stats.avgCollab || 5).toFixed(1)} / 5</span>
+              <span className="text-[#A1AAA0]">Collaboration:</span>
+              <span className="font-mono font-bold text-[#B7FF5A]">{(stats.avgCollab || 5).toFixed(1)} / 5</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="font-semibold text-slate-700 dark:text-slate-300">Communication:</span>
-              <span className="font-bold text-emerald-600">{(stats.avgComm || 5).toFixed(1)} / 5</span>
+              <span className="text-[#A1AAA0]">Communication:</span>
+              <span className="font-mono font-bold text-[#B7FF5A]">{(stats.avgComm || 5).toFixed(1)} / 5</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="font-semibold text-slate-700 dark:text-slate-300">Punctuality:</span>
-              <span className="font-bold text-emerald-600">{(stats.avgPunct || 5).toFixed(1)} / 5</span>
+              <span className="text-[#A1AAA0]">Punctuality:</span>
+              <span className="font-mono font-bold text-[#B7FF5A]">{(stats.avgPunct || 5).toFixed(1)} / 5</span>
             </div>
           </div>
         </div>
 
-        <div className="text-xs text-slate-500 max-w-xs bg-slate-50 dark:bg-slate-800/50 p-3.5 rounded-2xl">
-          <p className="font-bold text-slate-800 dark:text-slate-200 mb-1">
-            🛡️ Verified Collaborator Protocol
+        <div className="text-xs text-[#A1AAA0] max-w-xs bg-[#101310] border border-[#282F28] p-4 rounded-xl">
+          <p className="font-bold text-[#F4F7F2] mb-1 flex items-center gap-1.5">
+            <Shield className="w-4 h-4 text-[#B7FF5A]" />
+            <span>Verified Collaborator Protocol</span>
           </p>
-          Reviews can only be authored by students who actually shared a team workspace or project with you.
+          Reviews can only be authored by students who actually shared a verified team workspace or project with you.
         </div>
       </div>
 
       {/* Reviews List */}
       <div className="space-y-4">
-        <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+        <h2 className="text-lg font-bold text-[#F4F7F2]">
           Received Collaboration Feedback ({reviews.length})
         </h2>
 
         {reviews.length === 0 ? (
-          <div className="p-12 text-center rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 space-y-2">
-            <p className="text-sm font-semibold text-slate-600 dark:text-slate-300">
+          <div className="p-12 text-center rounded-2xl bg-[#151915] border border-[#282F28] space-y-2">
+            <p className="text-sm font-semibold text-[#A1AAA0]">
               No peer reviews yet.
             </p>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-[#70796F]">
               Complete sprint milestones with teammates to build your campus reputation score!
             </p>
           </div>
@@ -195,27 +198,27 @@ export const Reviews = () => {
             {reviews.map((rev) => (
               <div
                 key={rev._id}
-                className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-soft space-y-2 text-xs"
+                className="p-5 rounded-2xl bg-[#151915] border border-[#282F28] hover:border-[#384238] transition-colors space-y-2 text-xs"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="font-bold text-sm text-slate-900 dark:text-white">
+                    <span className="font-bold text-sm text-[#F4F7F2]">
                       {rev.reviewer?.name}
                     </span>
-                    <span className="text-slate-400">•</span>
-                    <span className="text-slate-500">{rev.reviewer?.college}</span>
+                    <span className="text-[#70796F]">•</span>
+                    <span className="text-[#A1AAA0]">{rev.reviewer?.college}</span>
                     {rev.project && (
-                      <span className="text-slate-400">
-                        on <em>"{rev.project?.title}"</em>
+                      <span className="text-[#70796F]">
+                        on <em className="text-[#B7FF5A]">"{rev.project?.title}"</em>
                       </span>
                     )}
                   </div>
                   <StarRating value={rev.rating} size="sm" />
                 </div>
-                <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed italic">
+                <p className="text-xs text-[#F4F7F2] leading-relaxed italic bg-[#101310] p-3 rounded-xl border border-[#282F28]/60">
                   "{rev.comment}"
                 </p>
-                <p className="text-[10px] text-slate-400 pt-1">
+                <p className="text-[10px] font-mono text-[#70796F] pt-1">
                   Submitted {new Date(rev.createdAt).toLocaleDateString()}
                 </p>
               </div>
@@ -228,7 +231,7 @@ export const Reviews = () => {
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Write a Peer Review">
         <form onSubmit={handleSubmitReview} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-xs font-semibold text-[#A1AAA0] mb-1.5">
               Select Workspace Project
             </label>
             <select
@@ -237,7 +240,7 @@ export const Reviews = () => {
                 const target = myTeams.find((t) => t._id === e.target.value);
                 if (target) handleSelectTeam(target);
               }}
-              className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-2.5 text-xs text-slate-800 dark:text-slate-200 focus:outline-none"
+              className="input-surface w-full p-2.5 text-xs rounded-xl"
             >
               {myTeams.map((t) => (
                 <option key={t._id} value={t._id}>
@@ -248,16 +251,16 @@ export const Reviews = () => {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-xs font-semibold text-[#A1AAA0] mb-1.5">
               Select Teammate to Review
             </label>
             {collaborators.length === 0 ? (
-              <p className="text-xs text-slate-400 italic">No other teammates in this workspace.</p>
+              <p className="text-xs text-[#70796F] italic">No other teammates in this workspace.</p>
             ) : (
               <select
                 value={selectedRevieweeId}
                 onChange={(e) => setSelectedRevieweeId(e.target.value)}
-                className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-2.5 text-xs text-slate-800 dark:text-slate-200 focus:outline-none"
+                className="input-surface w-full p-2.5 text-xs rounded-xl"
               >
                 {collaborators.map((c) => (
                   <option key={c._id} value={c._id}>
@@ -269,14 +272,16 @@ export const Reviews = () => {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-xs font-semibold text-[#A1AAA0] mb-1.5">
               Overall Collaboration Rating
             </label>
-            <StarRating value={rating} onChange={setRating} editable size="lg" />
+            <div className="p-3 rounded-xl bg-[#101310] border border-[#282F28] w-fit">
+              <StarRating value={rating} onChange={setRating} editable size="lg" />
+            </div>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-xs font-semibold text-[#A1AAA0] mb-1.5">
               Feedback Comment *
             </label>
             <textarea
@@ -286,22 +291,22 @@ export const Reviews = () => {
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               placeholder="What made collaborating with this student great? How was their communication and contribution?"
-              className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-3 text-xs text-slate-800 dark:text-slate-200 focus:outline-none"
+              className="input-surface w-full p-3 text-xs rounded-xl"
             />
           </div>
 
-          <div className="flex justify-end gap-2 pt-2">
+          <div className="flex justify-end gap-2.5 pt-3 border-t border-[#282F28]">
             <button
               type="button"
               onClick={() => setIsModalOpen(false)}
-              className="rounded-xl px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100"
+              className="px-4 py-2 text-xs font-semibold text-[#70796F] hover:text-[#F4F7F2] transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={submitting || !selectedRevieweeId}
-              className="rounded-xl bg-brand-600 px-5 py-2 text-xs font-bold text-white hover:bg-brand-700 disabled:opacity-50"
+              className="btn-primary px-5 py-2 text-xs font-semibold disabled:opacity-50"
             >
               {submitting ? 'Submitting...' : 'Post Review'}
             </button>

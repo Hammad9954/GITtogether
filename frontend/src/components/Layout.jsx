@@ -14,16 +14,16 @@ export const Layout = () => {
   const showSidebar = user && !isAuthPage;
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col">
+    <div className="min-h-screen bg-[#090B0A] text-[#F4F7F2] flex flex-col antialiased">
       <Navbar onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
 
-      <div className="flex flex-1">
+      <div className="flex flex-1 relative">
         {showSidebar && (
           <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
         )}
 
         <main
-          className={`flex-1 transition-all duration-300 ${
+          className={`flex-1 transition-all duration-200 ${
             showSidebar ? 'lg:pl-64' : ''
           } p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full`}
         >

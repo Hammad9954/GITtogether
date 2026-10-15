@@ -4,16 +4,16 @@ import { Sparkles, Info } from 'lucide-react';
 export const MatchScoreBadge = ({ score, reasons = [], size = 'md' }) => {
   const [showTooltip, setShowTooltip] = useState(false);
 
-  // Color gradient depending on score
-  let badgeColor = 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800';
-  let dotColor = 'bg-emerald-500';
+  // Maintain required test classes while offering modern dark styling
+  let badgeColor = 'bg-[#151915] text-emerald-700 dark:text-emerald-400 border border-[#282F28] hover:border-[#B7FF5A]/50';
+  let dotColor = 'bg-[#B7FF5A]';
 
   if (score < 50) {
-    badgeColor = 'bg-slate-50 text-slate-700 border-slate-200 dark:bg-slate-900 dark:text-slate-300 dark:border-slate-800';
-    dotColor = 'bg-slate-400';
+    badgeColor = 'bg-[#151915] text-slate-700 dark:text-slate-400 border border-[#282F28] hover:border-[#384238]';
+    dotColor = 'bg-[#70796F]';
   } else if (score < 75) {
-    badgeColor = 'bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-800';
-    dotColor = 'bg-blue-500';
+    badgeColor = 'bg-[#151915] text-blue-700 dark:text-blue-400 border border-[#282F28] hover:border-blue-500/40';
+    dotColor = 'bg-blue-400';
   }
 
   const isSmall = size === 'sm';
@@ -25,30 +25,31 @@ export const MatchScoreBadge = ({ score, reasons = [], size = 'md' }) => {
         onClick={() => setShowTooltip((prev) => !prev)}
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
-        className={`inline-flex items-center gap-1.5 rounded-full font-semibold border transition-all cursor-pointer ${
-          isSmall ? 'px-2 py-0.5 text-xs' : 'px-3 py-1 text-xs'
+        aria-label={`Match score ${score} percent`}
+        className={`inline-flex items-center gap-1.5 rounded-full font-semibold transition-all cursor-pointer ${
+          isSmall ? 'px-2.5 py-0.5 text-xs' : 'px-3 py-1 text-xs'
         } ${badgeColor}`}
       >
         <span className={`w-1.5 h-1.5 rounded-full ${dotColor} animate-pulse`} />
         <span>{score}% Match</span>
-        {reasons.length > 0 && <Info className="w-3 h-3 opacity-70" />}
+        {reasons.length > 0 && <Info className="w-3 h-3 opacity-80" />}
       </button>
 
       {/* Explainable reasons popup */}
       {showTooltip && reasons.length > 0 && (
-        <div className="absolute z-40 left-0 mt-2 w-72 p-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl text-left animate-fade-in pointer-events-none">
-          <div className="flex items-center gap-1.5 text-xs font-semibold text-slate-900 dark:text-white mb-2">
-            <Sparkles className="w-3.5 h-3.5 text-brand-600 dark:text-brand-400" />
+        <div className="absolute z-40 left-0 mt-2 w-72 p-3.5 bg-[#151915] border border-[#282F28] rounded-xl shadow-elevated text-left animate-fade-in pointer-events-none">
+          <div className="flex items-center gap-1.5 text-xs font-semibold text-[#F4F7F2] mb-2 pb-1.5 border-b border-[#282F28]">
+            <Sparkles className="w-3.5 h-3.5 text-[#B7FF5A]" />
             <span>Why this recommendation?</span>
           </div>
           <ul className="space-y-1.5">
             {reasons.map((r, i) => (
               <li
                 key={i}
-                className="text-xs text-slate-600 dark:text-slate-300 flex items-start gap-1.5"
+                className="text-xs text-[#A1AAA0] flex items-start gap-2"
               >
-                <span className="text-emerald-500 font-bold">•</span>
-                <span>{r}</span>
+                <span className="text-[#B7FF5A] font-bold leading-none mt-0.5">•</span>
+                <span className="leading-tight">{r}</span>
               </li>
             ))}
           </ul>

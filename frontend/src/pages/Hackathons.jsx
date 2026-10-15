@@ -105,21 +105,21 @@ export const Hackathons = () => {
 
   if (loading) {
     return (
-      <div className="py-12 text-center">
-        <Loader2 className="w-8 h-8 animate-spin text-brand-600 mx-auto" />
+      <div className="py-24 text-center">
+        <Loader2 className="w-8 h-8 animate-spin text-[#B7FF5A] mx-auto" />
       </div>
     );
   }
 
   return (
-    <div className="space-y-8 animate-fade-in py-4">
+    <div className="space-y-8 animate-fade-in py-4 max-w-7xl mx-auto">
       <div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
-          <Trophy className="w-7 h-7 text-amber-500" />
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-[#F4F7F2] flex items-center gap-2.5">
+          <Trophy className="w-7 h-7 text-[#B7FF5A]" />
           <span>Hackathons & Competitions</span>
         </h1>
-        <p className="text-sm text-slate-500 dark:text-slate-400">
-          Form collegiate squads, compete for prize grants, and test your prototypes on global stages
+        <p className="text-sm text-[#A1AAA0] mt-1">
+          Form collegiate squads, compete for prize grants, and test your prototypes on global stages.
         </p>
       </div>
 
@@ -129,41 +129,41 @@ export const Hackathons = () => {
           return (
             <div
               key={h._id}
-              className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-soft hover:shadow-md transition-all flex flex-col justify-between space-y-5"
+              className="p-6 sm:p-8 rounded-2xl bg-[#151915] border border-[#282F28] hover:border-[#384238] transition-all flex flex-col justify-between space-y-5"
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-amber-50 text-amber-800 dark:bg-amber-950 dark:text-amber-300">
+                  <span className="text-[11px] font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[#B7FF5A]/10 text-[#B7FF5A] border border-[#B7FF5A]/20">
                     {h.mode} Event
                   </span>
-                  <span className="text-xs font-semibold text-slate-400">
+                  <span className="text-xs text-[#70796F] font-mono">
                     Organizer: {h.organizer}
                   </span>
                 </div>
 
                 <div>
-                  <h2 className="text-xl font-bold text-slate-900 dark:text-white">
+                  <h2 className="text-xl font-bold text-[#F4F7F2]">
                     {h.title}
                   </h2>
                   {h.tagline && (
-                    <p className="text-xs font-semibold text-brand-600 dark:text-brand-400 mt-0.5">
+                    <p className="text-xs font-medium text-[#B7FF5A] mt-1">
                       {h.tagline}
                     </p>
                   )}
                 </div>
 
-                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3">
+                <p className="text-xs text-[#A1AAA0] leading-relaxed line-clamp-3">
                   {h.description}
                 </p>
 
                 {/* Event Schedule & Location */}
-                <div className="grid grid-cols-2 gap-2 text-xs text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-800/50 p-3 rounded-2xl">
-                  <div className="flex items-center gap-1.5">
-                    <Calendar className="w-3.5 h-3.5 text-brand-500" />
-                    <span>{new Date(h.startDate).toLocaleDateString()}</span>
+                <div className="grid grid-cols-2 gap-2 text-xs text-[#A1AAA0] bg-[#101310] border border-[#282F28] p-3 rounded-xl">
+                  <div className="flex items-center gap-2">
+                    <Calendar className="w-3.5 h-3.5 text-[#B7FF5A]" />
+                    <span className="font-mono">{new Date(h.startDate).toLocaleDateString()}</span>
                   </div>
-                  <div className="flex items-center gap-1.5">
-                    <MapPin className="w-3.5 h-3.5 text-rose-500" />
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-3.5 h-3.5 text-rose-400" />
                     <span className="truncate">{h.location || 'Virtual'}</span>
                   </div>
                 </div>
@@ -173,7 +173,7 @@ export const Hackathons = () => {
                   {(h.themes || []).map((theme) => (
                     <span
                       key={theme}
-                      className="text-[10px] font-semibold px-2 py-0.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300"
+                      className="text-[11px] font-medium px-2.5 py-1 rounded-lg bg-[#1B211B] text-[#A1AAA0] border border-[#282F28]"
                     >
                       {theme}
                     </span>
@@ -183,8 +183,8 @@ export const Hackathons = () => {
                 {/* Prizes preview */}
                 {h.prizes && h.prizes.length > 0 && (
                   <div className="text-xs pt-1 space-y-1">
-                    <span className="font-bold text-slate-700 dark:text-slate-300">Top Prize: </span>
-                    <span className="text-emerald-600 font-bold">
+                    <span className="text-[#70796F]">Top Prize: </span>
+                    <span className="text-[#B7FF5A] font-mono font-bold">
                       {h.prizes[0].place}: {h.prizes[0].reward}
                     </span>
                   </div>
@@ -192,13 +192,13 @@ export const Hackathons = () => {
               </div>
 
               {/* Action Buttons */}
-              <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3">
+              <div className="pt-4 border-t border-[#282F28] flex items-center justify-between gap-3">
                 <button
                   onClick={() => handleJoinSolo(h._id)}
-                  className={`flex-1 rounded-xl py-2.5 text-xs font-bold transition-all ${
+                  className={`flex-1 rounded-xl py-2.5 text-xs font-semibold transition-all ${
                     isParticipating
-                      ? 'bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950 dark:text-emerald-300'
-                      : 'bg-brand-600 text-white hover:bg-brand-700 shadow'
+                      ? 'bg-[#B7FF5A]/10 text-[#B7FF5A] border border-[#B7FF5A]/30'
+                      : 'btn-primary'
                   }`}
                 >
                   {isParticipating ? '✓ Registered Solo' : 'Register Solo'}
@@ -209,7 +209,7 @@ export const Hackathons = () => {
                     setSelectedHackathon(h);
                     setTeamModalOpen(true);
                   }}
-                  className="rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-4 py-2.5 text-xs font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
+                  className="btn-secondary px-4 py-2.5 text-xs font-semibold"
                 >
                   Register Team
                 </button>
@@ -226,18 +226,18 @@ export const Hackathons = () => {
         title={`Register Team for ${selectedHackathon?.title}`}
       >
         <form onSubmit={handleRegisterTeam} className="space-y-4">
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-[#A1AAA0]">
             Select one of your existing team workspaces to represent in this hackathon.
           </p>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-xs font-semibold text-[#A1AAA0] mb-1.5">
               Select Your Team
             </label>
             <select
               value={selectedTeamId}
               onChange={(e) => setSelectedTeamId(e.target.value)}
-              className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-2.5 text-sm text-slate-800 dark:text-slate-200 focus:outline-none"
+              className="input-surface w-full p-2.5 text-xs rounded-xl"
             >
               {myTeams.map((t) => (
                 <option key={t._id} value={t._id}>
@@ -247,18 +247,18 @@ export const Hackathons = () => {
             </select>
           </div>
 
-          <div className="flex justify-end gap-2 pt-2">
+          <div className="flex justify-end gap-2.5 pt-3 border-t border-[#282F28]">
             <button
               type="button"
               onClick={() => setTeamModalOpen(false)}
-              className="rounded-xl px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100"
+              className="px-4 py-2 text-xs font-semibold text-[#70796F] hover:text-[#F4F7F2] transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={registeringTeam || !selectedTeamId}
-              className="rounded-xl bg-brand-600 px-5 py-2 text-xs font-bold text-white hover:bg-brand-700 disabled:opacity-50"
+              className="btn-primary px-5 py-2 text-xs font-semibold disabled:opacity-50"
             >
               {registeringTeam ? 'Registering...' : 'Confirm Team Registration'}
             </button>

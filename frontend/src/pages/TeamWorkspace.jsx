@@ -16,6 +16,7 @@ import {
   Paperclip,
   Check,
   Sparkles,
+  ExternalLink,
 } from 'lucide-react';
 import api from '../api/client.js';
 import { useAuth } from '../context/AuthContext.jsx';
@@ -187,17 +188,17 @@ export const TeamWorkspace = () => {
 
   if (loading) {
     return (
-      <div className="py-12 text-center">
-        <Loader2 className="w-8 h-8 animate-spin text-brand-600 mx-auto" />
+      <div className="py-24 text-center">
+        <Loader2 className="w-8 h-8 animate-spin text-[#B7FF5A] mx-auto" />
       </div>
     );
   }
 
   if (!team) {
     return (
-      <div className="py-12 text-center text-slate-500">
+      <div className="py-16 text-center text-[#A1AAA0]">
         <p>Team workspace not found or access denied.</p>
-        <Link to="/teams" className="text-brand-600 font-bold hover:underline mt-2 inline-block">
+        <Link to="/teams" className="text-[#B7FF5A] font-bold hover:underline mt-2 inline-block">
           Return to My Teams
         </Link>
       </div>
@@ -205,27 +206,28 @@ export const TeamWorkspace = () => {
   }
 
   return (
-    <div className="space-y-6 animate-fade-in py-4">
+    <div className="space-y-6 animate-fade-in py-4 max-w-7xl mx-auto">
       {/* Workspace Header */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-soft space-y-4">
+      <div className="p-6 sm:p-8 rounded-2xl bg-[#151915] border border-[#282F28] space-y-5">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div>
+          <div className="space-y-1.5">
             <div className="flex items-center gap-2 mb-1">
-              <span className="text-xs font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-md bg-brand-50 text-brand-700 dark:bg-brand-950 dark:text-brand-300">
+              <span className="text-[11px] font-mono font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[#B7FF5A]/10 text-[#B7FF5A] border border-[#B7FF5A]/20">
                 Team Workspace
               </span>
-              <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 capitalize">
+              <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-[#1B211B] border border-[#282F28] text-[#A1AAA0] capitalize">
                 {team.status}
               </span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#F4F7F2] tracking-tight">
               {team.name}
             </h1>
             {team.project && (
-              <p className="text-xs text-brand-600 dark:text-brand-400 font-semibold pt-0.5">
+              <p className="text-xs text-[#A1AAA0] pt-0.5">
                 Connected Project:{' '}
-                <Link to={`/projects/${team.project._id}`} className="hover:underline">
-                  {team.project.title}
+                <Link to={`/projects/${team.project._id}`} className="text-[#B7FF5A] hover:underline font-medium inline-flex items-center gap-1">
+                  <span>{team.project.title}</span>
+                  <ExternalLink className="w-3 h-3" />
                 </Link>
               </p>
             )}
@@ -235,7 +237,7 @@ export const TeamWorkspace = () => {
             {!isLeader && (
               <button
                 onClick={handleLeaveTeam}
-                className="inline-flex items-center gap-1.5 rounded-xl border border-rose-200 text-rose-600 px-3.5 py-2 text-xs font-bold hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors"
+                className="inline-flex items-center gap-1.5 rounded-xl border border-rose-500/30 text-rose-400 px-3.5 py-2 text-xs font-semibold hover:bg-rose-500/10 transition-colors"
               >
                 <LogOut className="w-3.5 h-3.5" />
                 <span>Leave Team</span>
@@ -245,13 +247,13 @@ export const TeamWorkspace = () => {
         </div>
 
         {/* Tab Navigation */}
-        <div className="flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pt-2 text-sm font-bold">
+        <div className="flex items-center gap-2 border-b border-[#282F28] pt-2 text-sm font-semibold">
           <button
             onClick={() => setActiveTab('overview')}
-            className={`pb-3 px-3 transition-colors border-b-2 flex items-center gap-1.5 ${
+            className={`pb-3 px-3 transition-colors border-b-2 flex items-center gap-2 text-xs sm:text-sm ${
               activeTab === 'overview'
-                ? 'border-brand-600 text-brand-600 dark:text-brand-400'
-                : 'border-transparent text-slate-500 hover:text-slate-900 dark:hover:text-white'
+                ? 'border-[#B7FF5A] text-[#B7FF5A]'
+                : 'border-transparent text-[#70796F] hover:text-[#F4F7F2]'
             }`}
           >
             <FolderGit2 className="w-4 h-4" />
@@ -259,10 +261,10 @@ export const TeamWorkspace = () => {
           </button>
           <button
             onClick={() => setActiveTab('chat')}
-            className={`pb-3 px-3 transition-colors border-b-2 flex items-center gap-1.5 ${
+            className={`pb-3 px-3 transition-colors border-b-2 flex items-center gap-2 text-xs sm:text-sm ${
               activeTab === 'chat'
-                ? 'border-brand-600 text-brand-600 dark:text-brand-400'
-                : 'border-transparent text-slate-500 hover:text-slate-900 dark:hover:text-white'
+                ? 'border-[#B7FF5A] text-[#B7FF5A]'
+                : 'border-transparent text-[#70796F] hover:text-[#F4F7F2]'
             }`}
           >
             <MessageSquare className="w-4 h-4" />
@@ -270,10 +272,10 @@ export const TeamWorkspace = () => {
           </button>
           <button
             onClick={() => setActiveTab('members')}
-            className={`pb-3 px-3 transition-colors border-b-2 flex items-center gap-1.5 ${
+            className={`pb-3 px-3 transition-colors border-b-2 flex items-center gap-2 text-xs sm:text-sm ${
               activeTab === 'members'
-                ? 'border-brand-600 text-brand-600 dark:text-brand-400'
-                : 'border-transparent text-slate-500 hover:text-slate-900 dark:hover:text-white'
+                ? 'border-[#B7FF5A] text-[#B7FF5A]'
+                : 'border-transparent text-[#70796F] hover:text-[#F4F7F2]'
             }`}
           >
             <Users className="w-4 h-4" />
@@ -286,63 +288,67 @@ export const TeamWorkspace = () => {
       {activeTab === 'overview' && (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 space-y-6">
-            <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-soft space-y-3">
-              <h3 className="text-base font-bold text-slate-900 dark:text-white">Team Description</h3>
-              <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                {team.description || 'Welcome to your team collaboration workspace!'}
+            <div className="p-6 sm:p-8 rounded-2xl bg-[#151915] border border-[#282F28] space-y-3">
+              <h3 className="text-base font-bold text-[#F4F7F2]">Team Mission & Description</h3>
+              <p className="text-sm text-[#A1AAA0] leading-relaxed">
+                {team.description || 'Welcome to your team collaboration workspace! Coordinate development, manage shared files, and communicate with teammates here.'}
               </p>
             </div>
 
             {/* Shared Resources & Links */}
-            <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-soft space-y-4">
+            <div className="p-6 sm:p-8 rounded-2xl bg-[#151915] border border-[#282F28] space-y-5">
               <div className="flex items-center justify-between">
-                <h3 className="text-base font-bold text-slate-900 dark:text-white">
-                  Shared Team Resources
-                </h3>
+                <div>
+                  <h3 className="text-base font-bold text-[#F4F7F2]">Shared Team Resources</h3>
+                  <p className="text-xs text-[#70796F] mt-0.5">Quick access links for your repository, design files, and documentation.</p>
+                </div>
                 <button
                   onClick={handleSaveLinks}
                   disabled={savingLinks}
-                  className="rounded-xl bg-brand-600 px-3 py-1.5 text-xs font-bold text-white hover:bg-brand-700 disabled:opacity-50"
+                  className="btn-primary px-3.5 py-1.5 text-xs font-semibold disabled:opacity-50"
                 >
                   {savingLinks ? 'Saving...' : 'Save Links'}
                 </button>
               </div>
 
-              <div className="space-y-3 text-xs">
+              <div className="space-y-4 text-xs">
                 <div>
-                  <label className="font-semibold text-slate-700 dark:text-slate-300 block mb-1">
-                    GitHub Repo URL
+                  <label className="font-semibold text-[#A1AAA0] flex items-center gap-1.5 mb-1.5">
+                    <Github className="w-3.5 h-3.5 text-[#B7FF5A]" />
+                    <span>GitHub Repository URL</span>
                   </label>
                   <input
                     type="url"
                     value={links.github}
                     onChange={(e) => setLinks({ ...links, github: e.target.value })}
-                    placeholder="https://github.com/..."
-                    className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-2 text-slate-800 dark:text-slate-200 focus:outline-none"
+                    placeholder="https://github.com/organization/repo"
+                    className="input-surface w-full p-2.5 text-xs rounded-xl"
                   />
                 </div>
                 <div>
-                  <label className="font-semibold text-slate-700 dark:text-slate-300 block mb-1">
-                    Figma / Design Canvas URL
+                  <label className="font-semibold text-[#A1AAA0] flex items-center gap-1.5 mb-1.5">
+                    <Globe className="w-3.5 h-3.5 text-[#B7FF5A]" />
+                    <span>Figma / Design Canvas URL</span>
                   </label>
                   <input
                     type="url"
                     value={links.figma}
                     onChange={(e) => setLinks({ ...links, figma: e.target.value })}
                     placeholder="https://figma.com/file/..."
-                    className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-2 text-slate-800 dark:text-slate-200 focus:outline-none"
+                    className="input-surface w-full p-2.5 text-xs rounded-xl"
                   />
                 </div>
                 <div>
-                  <label className="font-semibold text-slate-700 dark:text-slate-300 block mb-1">
-                    Docs & Meeting Notes URL
+                  <label className="font-semibold text-[#A1AAA0] flex items-center gap-1.5 mb-1.5">
+                    <FileText className="w-3.5 h-3.5 text-[#B7FF5A]" />
+                    <span>Docs & Meeting Notes URL</span>
                   </label>
                   <input
                     type="url"
                     value={links.docs}
                     onChange={(e) => setLinks({ ...links, docs: e.target.value })}
-                    placeholder="https://notion.so/..."
-                    className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-2 text-slate-800 dark:text-slate-200 focus:outline-none"
+                    placeholder="https://notion.so/... or https://docs.google.com/..."
+                    className="input-surface w-full p-2.5 text-xs rounded-xl"
                   />
                 </div>
               </div>
@@ -350,27 +356,27 @@ export const TeamWorkspace = () => {
           </div>
 
           {/* Quick Roster */}
-          <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-soft space-y-4">
-            <h3 className="text-base font-bold text-slate-900 dark:text-white">Workspace Roster</h3>
+          <div className="p-6 rounded-2xl bg-[#151915] border border-[#282F28] space-y-4 h-fit">
+            <h3 className="text-base font-bold text-[#F4F7F2]">Workspace Roster</h3>
             <div className="space-y-3">
               {(team.members || []).map((m, idx) => (
-                <div key={idx} className="flex items-center justify-between text-xs">
-                  <div className="flex items-center gap-2.5">
-                    <div className="h-8 w-8 rounded-full bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-300 font-bold flex items-center justify-center uppercase">
+                <div key={idx} className="flex items-center justify-between text-xs p-2.5 rounded-xl bg-[#101310] border border-[#282F28]/60">
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <div className="h-8 w-8 rounded-full bg-[#1B211B] border border-[#282F28] text-[#B7FF5A] font-bold flex items-center justify-center uppercase text-xs flex-shrink-0">
                       {m.user?.name?.charAt(0)}
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <Link
                         to={`/students/${m.user?._id}`}
-                        className="font-bold text-slate-900 dark:text-white hover:underline block"
+                        className="font-bold text-[#F4F7F2] hover:text-[#B7FF5A] truncate block"
                       >
                         {m.user?.name}
                       </Link>
-                      <span className="text-[11px] text-slate-400">{m.role}</span>
+                      <span className="text-[11px] text-[#70796F] truncate block">{m.role}</span>
                     </div>
                   </div>
                   {m.user?._id === team.leader?._id && (
-                    <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-purple-100 text-purple-700 dark:bg-purple-950 dark:text-purple-300">
+                    <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-[#B7FF5A]/10 text-[#B7FF5A] border border-[#B7FF5A]/20 flex-shrink-0">
                       LEAD
                     </span>
                   )}
@@ -383,24 +389,24 @@ export const TeamWorkspace = () => {
 
       {/* TAB 2: LIVE TEAM CHAT */}
       {activeTab === 'chat' && (
-        <div className="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-soft overflow-hidden flex flex-col h-[550px]">
+        <div className="rounded-2xl bg-[#151915] border border-[#282F28] overflow-hidden flex flex-col h-[600px]">
           {/* Chat Header */}
-          <div className="p-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-slate-50/50 dark:bg-slate-800/40">
-            <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-xs font-bold text-slate-800 dark:text-slate-200">
-                Team Channel: {team.name}
+          <div className="p-4 border-b border-[#282F28] flex items-center justify-between bg-[#101310]">
+            <div className="flex items-center gap-2.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#B7FF5A] animate-pulse" />
+              <span className="text-xs font-bold text-[#F4F7F2]">
+                Team Channel: #{team.name}
               </span>
             </div>
-            <span className="text-xs text-slate-400">
-              {team.members?.length || 1} team members
+            <span className="text-xs text-[#70796F] font-mono">
+              {team.members?.length || 1} members active
             </span>
           </div>
 
           {/* Messages Stream */}
-          <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4">
+          <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 bg-[#090B0A]/60">
             {messages.length === 0 ? (
-              <div className="h-full flex items-center justify-center text-center text-slate-400 text-xs">
+              <div className="h-full flex items-center justify-center text-center text-[#70796F] text-xs">
                 <p>No messages yet in this team channel. Say hello to kick off your collaboration!</p>
               </div>
             ) : (
@@ -413,25 +419,25 @@ export const TeamWorkspace = () => {
                       isMyMsg ? 'ml-auto flex-row-reverse' : ''
                     }`}
                   >
-                    <div className="h-7 w-7 rounded-full bg-brand-100 text-brand-700 font-bold text-[10px] flex items-center justify-center flex-shrink-0 uppercase">
+                    <div className="h-7 w-7 rounded-full bg-[#1B211B] border border-[#282F28] text-[#B7FF5A] font-bold text-[10px] flex items-center justify-center flex-shrink-0 uppercase">
                       {msg.sender?.name?.charAt(0)}
                     </div>
                     <div className="space-y-1">
                       <div
-                        className={`flex items-center gap-2 text-[10px] text-slate-400 ${
+                        className={`flex items-center gap-2 text-[10px] text-[#70796F] ${
                           isMyMsg ? 'justify-end' : ''
                         }`}
                       >
-                        <span className="font-bold text-slate-700 dark:text-slate-300">
+                        <span className="font-semibold text-[#A1AAA0]">
                           {isMyMsg ? 'You' : msg.sender?.name}
                         </span>
-                        <span>{new Date(msg.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                        <span className="font-mono text-[9px]">{new Date(msg.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                       </div>
                       <div
                         className={`p-3 rounded-2xl text-xs leading-relaxed ${
                           isMyMsg
-                            ? 'bg-brand-600 text-white rounded-tr-none'
-                            : 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 rounded-tl-none'
+                            ? 'bg-[#B7FF5A] text-[#090B0A] font-medium rounded-tr-none'
+                            : 'bg-[#1B211B] border border-[#282F28] text-[#F4F7F2] rounded-tl-none'
                         }`}
                       >
                         {msg.content}
@@ -446,27 +452,29 @@ export const TeamWorkspace = () => {
 
           {/* Typing indicator */}
           {typingUser && (
-            <div className="px-4 py-1 text-[11px] text-slate-400 italic">
-              {typingUser} is typing...
+            <div className="px-4 py-1.5 text-[11px] text-[#A1AAA0] italic bg-[#101310] border-t border-[#282F28]/50 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#B7FF5A] animate-ping" />
+              <span>{typingUser} is typing...</span>
             </div>
           )}
 
           {/* Input Box */}
           <form
             onSubmit={handleSendMessage}
-            className="p-3 border-t border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40 flex items-center gap-2"
+            className="p-3 border-t border-[#282F28] bg-[#101310] flex items-center gap-2"
           >
             <input
               type="text"
               value={newMessage}
               onChange={handleTyping}
               placeholder="Send a message to your team channel..."
-              className="flex-1 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-3.5 py-2.5 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500"
+              className="flex-1 input-surface px-4 py-2.5 text-xs rounded-xl"
             />
             <button
               type="submit"
               disabled={sendingMsg || !newMessage.trim()}
-              className="rounded-xl bg-brand-600 p-2.5 text-white hover:bg-brand-700 transition-colors disabled:opacity-50"
+              className="btn-primary p-2.5 text-[#090B0A] rounded-xl disabled:opacity-50 transition-colors"
+              title="Send Message"
             >
               <Send className="w-4 h-4" />
             </button>
@@ -476,43 +484,56 @@ export const TeamWorkspace = () => {
 
       {/* TAB 3: MEMBERS & ROLES */}
       {activeTab === 'members' && (
-        <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-soft space-y-4">
-          <h3 className="text-base font-bold text-slate-900 dark:text-white">
-            Team Members & Permissions
-          </h3>
+        <div className="p-6 sm:p-8 rounded-2xl bg-[#151915] border border-[#282F28] space-y-4">
+          <div className="flex items-center justify-between">
+            <h3 className="text-base font-bold text-[#F4F7F2]">
+              Team Members & Permissions
+            </h3>
+            <span className="text-xs font-mono text-[#70796F]">
+              {team.members?.length || 0} Total Members
+            </span>
+          </div>
+
           <div className="space-y-3">
             {(team.members || []).map((m) => {
               const memberIsLeader = m.user?._id === team.leader?._id;
               return (
                 <div
                   key={m.user?._id}
-                  className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/70 dark:border-slate-700/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs"
+                  className="p-4 rounded-xl bg-[#101310] border border-[#282F28] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="h-9 w-9 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center uppercase">
+                    <div className="h-9 w-9 rounded-full bg-[#1B211B] border border-[#282F28] text-[#B7FF5A] font-bold flex items-center justify-center uppercase text-sm">
                       {m.user?.name?.charAt(0)}
                     </div>
                     <div>
-                      <Link
-                        to={`/students/${m.user?._id}`}
-                        className="font-bold text-sm text-slate-900 dark:text-white hover:underline block"
-                      >
-                        {m.user?.name}
-                      </Link>
-                      <p className="text-slate-500">
+                      <div className="flex items-center gap-2">
+                        <Link
+                          to={`/students/${m.user?._id}`}
+                          className="font-bold text-sm text-[#F4F7F2] hover:text-[#B7FF5A] transition-colors"
+                        >
+                          {m.user?.name}
+                        </Link>
+                        {memberIsLeader && (
+                          <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#B7FF5A]/10 text-[#B7FF5A] border border-[#B7FF5A]/20">
+                            LEADER
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-[#70796F] text-[11px] mt-0.5">
                         {m.user?.college} • {m.user?.course}
                       </p>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-3 self-end sm:self-center">
-                    <span className="font-semibold text-slate-700 dark:text-slate-300">
+                    <span className="font-medium text-[#A1AAA0] px-2.5 py-1 rounded-lg bg-[#151915] border border-[#282F28]">
                       {m.role}
                     </span>
                     {isLeader && !memberIsLeader && (
                       <button
                         onClick={() => handleRemoveMember(m.user?._id)}
-                        className="p-1.5 rounded-lg text-slate-400 hover:text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/40"
+                        className="p-1.5 rounded-lg text-[#70796F] hover:text-rose-400 hover:bg-rose-500/10 transition-colors"
                         title="Remove Member"
                       >
                         <Trash2 className="w-4 h-4" />

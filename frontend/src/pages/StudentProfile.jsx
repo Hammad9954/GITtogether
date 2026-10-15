@@ -1,16 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import {
-  User,
   School,
-  BookOpen,
-  Calendar,
   Github,
   Linkedin,
   Globe,
-  Clock,
-  Sparkles,
-  MessageSquare,
   Star,
   Edit,
   Camera,
@@ -19,6 +13,7 @@ import {
   GraduationCap,
   Briefcase,
   CheckCircle2,
+  MessageSquare,
 } from 'lucide-react';
 import api from '../api/client.js';
 import { useAuth } from '../context/AuthContext.jsx';
@@ -174,16 +169,16 @@ export const StudentProfile = () => {
   if (loading) {
     return (
       <div className="py-12 text-center">
-        <Loader2 className="w-8 h-8 animate-spin text-brand-600 mx-auto" />
+        <Loader2 className="w-8 h-8 animate-spin text-[#B7FF5A] mx-auto" />
       </div>
     );
   }
 
   if (!student) {
     return (
-      <div className="py-12 text-center text-slate-500">
+      <div className="py-12 text-center text-[#70796F] max-w-xl mx-auto">
         <p>Profile not found.</p>
-        <Link to="/students" className="text-brand-600 font-bold hover:underline mt-2 inline-block">
+        <Link to="/students" className="text-[#B7FF5A] font-bold hover:underline mt-2 inline-block">
           Explore student directory
         </Link>
       </div>
@@ -191,14 +186,14 @@ export const StudentProfile = () => {
   }
 
   return (
-    <div className="max-w-5xl mx-auto space-y-8 animate-fade-in py-4">
+    <div className="max-w-5xl mx-auto space-y-8 animate-fade-in py-4 px-4">
       {/* Profile Header Card */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-soft relative overflow-hidden">
+      <div className="p-6 sm:p-8 rounded-2xl bg-[#151915] border border-[#282F28] shadow-card relative overflow-hidden">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
             {/* Avatar & Upload */}
             <div className="relative group">
-              <div className="h-20 w-20 sm:h-24 sm:w-24 rounded-3xl bg-brand-600 text-white font-extrabold text-3xl flex items-center justify-center uppercase shadow-lg shadow-brand-500/20 overflow-hidden">
+              <div className="h-20 w-20 sm:h-24 sm:w-24 rounded-2xl bg-[#1B211B] border border-[#282F28] text-[#B7FF5A] font-extrabold text-3xl flex items-center justify-center uppercase overflow-hidden">
                 {student.avatar ? (
                   <img src={student.avatar} alt={student.name} className="h-full w-full object-cover" />
                 ) : (
@@ -207,7 +202,7 @@ export const StudentProfile = () => {
               </div>
 
               {isMe && (
-                <label className="absolute bottom-0 right-0 p-1.5 rounded-xl bg-slate-900/80 text-white cursor-pointer hover:bg-slate-900 shadow">
+                <label className="absolute bottom-0 right-0 p-1.5 rounded-lg bg-[#090B0A]/90 text-[#F4F7F2] border border-[#282F28] cursor-pointer hover:text-[#B7FF5A] shadow transition-colors">
                   <Camera className="w-3.5 h-3.5" />
                   <input
                     type="file"
@@ -221,23 +216,23 @@ export const StudentProfile = () => {
 
             <div className="space-y-1">
               <div className="flex items-center gap-2">
-                <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
+                <h1 className="text-2xl sm:text-3xl font-extrabold text-[#F4F7F2]">
                   {student.name}
                 </h1>
                 {student.isVerified && (
-                  <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-0.5 rounded-full">
+                  <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#B7FF5A] bg-[#B7FF5A]/10 border border-[#B7FF5A]/30 px-2.5 py-0.5 rounded-full">
                     <CheckCircle2 className="w-3.5 h-3.5" />
                     <span>Verified Student</span>
                   </span>
                 )}
               </div>
 
-              <p className="text-sm font-semibold text-slate-600 dark:text-slate-300">
+              <p className="text-xs sm:text-sm font-semibold text-[#A1AAA0]">
                 {student.course || 'Student'} • {student.year || '1st Year'}
               </p>
 
-              <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 pt-0.5">
-                <School className="w-3.5 h-3.5 text-slate-400" />
+              <div className="flex items-center gap-2 text-xs text-[#70796F] pt-0.5">
+                <School className="w-3.5 h-3.5 text-[#70796F]" />
                 <span>{student.college || 'University'}</span>
               </div>
             </div>
@@ -248,7 +243,7 @@ export const StudentProfile = () => {
             {isMe ? (
               <button
                 onClick={() => setIsEditOpen(true)}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 px-4 py-2 text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+                className="btn-secondary w-full sm:w-auto text-xs py-2"
               >
                 <Edit className="w-4 h-4" />
                 <span>Edit Profile</span>
@@ -257,22 +252,23 @@ export const StudentProfile = () => {
               <>
                 <button
                   onClick={handleStartChat}
-                  className="inline-flex items-center gap-1.5 rounded-xl bg-brand-600 px-4 py-2 text-xs font-bold text-white shadow hover:bg-brand-700 transition-colors"
+                  className="btn-primary text-xs py-2 px-3.5"
                 >
                   <MessageSquare className="w-4 h-4" />
                   <span>Message</span>
                 </button>
                 <button
                   onClick={() => setIsSkillModalOpen(true)}
-                  className="inline-flex items-center gap-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 px-3.5 py-2 text-xs font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+                  className="btn-secondary text-xs py-2 px-3.5"
                 >
                   <GraduationCap className="w-4 h-4" />
                   <span>Learn From</span>
                 </button>
                 <button
                   onClick={() => setIsReportOpen(true)}
-                  className="p-2 rounded-xl text-slate-400 hover:text-rose-500 transition-colors"
+                  className="p-2 rounded-xl text-[#70796F] hover:text-rose-400 border border-[#282F28] bg-[#101310] transition-colors"
                   title="Report User"
+                  aria-label="Report User"
                 >
                   <ShieldAlert className="w-4 h-4" />
                 </button>
@@ -283,20 +279,20 @@ export const StudentProfile = () => {
 
         {/* Bio */}
         {student.bio && (
-          <p className="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <p className="mt-6 pt-5 border-t border-[#282F28] text-xs sm:text-sm text-[#A1AAA0] leading-relaxed">
             {student.bio}
           </p>
         )}
 
         {/* Portfolio & Social Links */}
         {student.portfolioLinks && (
-          <div className="mt-4 flex flex-wrap items-center gap-4 text-xs font-bold text-slate-600 dark:text-slate-300">
+          <div className="mt-4 flex flex-wrap items-center gap-4 text-xs font-semibold text-[#A1AAA0]">
             {student.portfolioLinks.github && (
               <a
                 href={student.portfolioLinks.github}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-1.5 hover:text-brand-600"
+                className="inline-flex items-center gap-1.5 hover:text-[#B7FF5A] transition-colors"
               >
                 <Github className="w-4 h-4" />
                 <span>GitHub</span>
@@ -307,7 +303,7 @@ export const StudentProfile = () => {
                 href={student.portfolioLinks.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-1.5 hover:text-brand-600"
+                className="inline-flex items-center gap-1.5 hover:text-[#B7FF5A] transition-colors"
               >
                 <Linkedin className="w-4 h-4" />
                 <span>LinkedIn</span>
@@ -318,7 +314,7 @@ export const StudentProfile = () => {
                 href={student.portfolioLinks.website}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-1.5 hover:text-brand-600"
+                className="inline-flex items-center gap-1.5 hover:text-[#B7FF5A] transition-colors"
               >
                 <Globe className="w-4 h-4" />
                 <span>Portfolio Website</span>
@@ -331,13 +327,13 @@ export const StudentProfile = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Left Column: Skills & Availability */}
         <div className="space-y-6">
-          <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-soft space-y-4">
-            <h3 className="text-base font-bold text-slate-900 dark:text-white">Skills & Toolkit</h3>
+          <div className="p-6 rounded-2xl bg-[#151915] border border-[#282F28] shadow-card space-y-4">
+            <h3 className="text-sm font-bold text-[#F4F7F2]">Skills & Toolkit</h3>
             <div className="flex flex-wrap gap-1.5">
               {(student.skills || []).map((skill) => (
                 <span
                   key={skill}
-                  className="px-2.5 py-1 rounded-xl bg-brand-50 text-brand-700 dark:bg-brand-950 dark:text-brand-300 text-xs font-semibold"
+                  className="px-2.5 py-1 rounded-lg bg-[#1B211B] text-[#B7FF5A] border border-[#282F28] text-xs font-medium"
                 >
                   {skill}
                 </span>
@@ -345,15 +341,15 @@ export const StudentProfile = () => {
             </div>
 
             {student.interests && student.interests.length > 0 && (
-              <div className="pt-3 border-t border-slate-100 dark:border-slate-800">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
+              <div className="pt-3 border-t border-[#282F28]">
+                <h4 className="text-[11px] font-bold uppercase tracking-wider text-[#70796F] mb-2">
                   Interests
                 </h4>
                 <div className="flex flex-wrap gap-1.5">
                   {student.interests.map((int) => (
                     <span
                       key={int}
-                      className="px-2 py-0.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[11px]"
+                      className="px-2 py-0.5 rounded-lg bg-[#101310] border border-[#282F28] text-[#A1AAA0] text-[11px]"
                     >
                       {int}
                     </span>
@@ -363,24 +359,24 @@ export const StudentProfile = () => {
             )}
           </div>
 
-          <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-soft space-y-3">
-            <h3 className="text-base font-bold text-slate-900 dark:text-white">Availability</h3>
+          <div className="p-6 rounded-2xl bg-[#151915] border border-[#282F28] shadow-card space-y-3">
+            <h3 className="text-sm font-bold text-[#F4F7F2]">Availability</h3>
             <div className="text-xs space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-slate-500">Status:</span>
-                <span className="font-bold text-slate-900 dark:text-white capitalize">
+                <span className="text-[#70796F]">Status:</span>
+                <span className="font-semibold text-[#F4F7F2] capitalize">
                   {student.availability?.status?.replace('-', ' ') || 'Actively looking'}
                 </span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-slate-500">Hours Commitment:</span>
-                <span className="font-bold text-slate-900 dark:text-white">
+                <span className="text-[#70796F]">Hours Commitment:</span>
+                <span className="font-semibold text-[#F4F7F2]">
                   {student.availability?.hoursPerWeek || 15} hrs/week
                 </span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-slate-500">Reputation Score:</span>
-                <span className="font-bold text-emerald-600 dark:text-emerald-400">
+                <span className="text-[#70796F]">Reputation Score:</span>
+                <span className="font-bold text-[#B7FF5A]">
                   ★ {student.reputationScore || 100}
                 </span>
               </div>
@@ -391,14 +387,14 @@ export const StudentProfile = () => {
         {/* Right 2 Columns: Experience & Peer Reviews */}
         <div className="md:col-span-2 space-y-6">
           {/* Peer Reviews Section */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-soft space-y-5">
+          <div className="p-6 sm:p-8 rounded-2xl bg-[#151915] border border-[#282F28] shadow-card space-y-5">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                  <Star className="w-5 h-5 text-amber-400 fill-amber-400" />
+                <h3 className="text-base font-bold text-[#F4F7F2] flex items-center gap-2">
+                  <Star className="w-4 h-4 text-amber-400 fill-amber-400" />
                   <span>Peer Reviews & Feedback ({reviews.length})</span>
                 </h3>
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-[#70796F]">
                   Verified evaluations from past collaborators on completed campus projects
                 </p>
               </div>
@@ -406,7 +402,7 @@ export const StudentProfile = () => {
               {!isMe && (
                 <Link
                   to="/reviews"
-                  className="rounded-xl bg-slate-100 dark:bg-slate-800 px-3 py-1.5 text-xs font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-200"
+                  className="btn-secondary text-xs px-3 py-1.5"
                 >
                   Write Review
                 </Link>
@@ -414,30 +410,30 @@ export const StudentProfile = () => {
             </div>
 
             {reviews.length === 0 ? (
-              <p className="text-xs text-slate-500 py-3">No collaboration reviews received yet.</p>
+              <p className="text-xs text-[#70796F] py-3">No collaboration reviews received yet.</p>
             ) : (
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {reviews.map((rev) => (
                   <div
                     key={rev._id}
-                    className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/70 dark:border-slate-700/60 space-y-2 text-xs"
+                    className="p-4 rounded-xl bg-[#101310] border border-[#282F28] space-y-2 text-xs"
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <span className="font-bold text-slate-900 dark:text-white">
+                        <span className="font-bold text-[#F4F7F2]">
                           {rev.reviewer?.name}
                         </span>
-                        <span className="text-slate-400">•</span>
-                        <span className="text-slate-500">{rev.reviewer?.college}</span>
+                        <span className="text-[#70796F]">•</span>
+                        <span className="text-[#A1AAA0]">{rev.reviewer?.college}</span>
                         {rev.project && (
-                          <span className="text-slate-400">
+                          <span className="text-[#70796F]">
                             on <em>"{rev.project?.title}"</em>
                           </span>
                         )}
                       </div>
                       <StarRating value={rev.rating} size="sm" />
                     </div>
-                    <p className="text-slate-600 dark:text-slate-300 italic">"{rev.comment}"</p>
+                    <p className="text-[#A1AAA0] italic">"{rev.comment}"</p>
                   </div>
                 ))}
               </div>
@@ -446,20 +442,20 @@ export const StudentProfile = () => {
 
           {/* Experience History */}
           {student.experience && student.experience.length > 0 && (
-            <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-soft space-y-4">
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <Briefcase className="w-5 h-5 text-brand-600" />
+            <div className="p-6 sm:p-8 rounded-2xl bg-[#151915] border border-[#282F28] shadow-card space-y-4">
+              <h3 className="text-base font-bold text-[#F4F7F2] flex items-center gap-2">
+                <Briefcase className="w-4 h-4 text-[#B7FF5A]" />
                 <span>Experience & Background</span>
               </h3>
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {student.experience.map((exp, idx) => (
-                  <div key={idx} className="space-y-1 text-xs">
-                    <p className="font-bold text-sm text-slate-900 dark:text-white">{exp.title}</p>
-                    <p className="text-slate-500">
+                  <div key={idx} className="space-y-1 text-xs p-3 rounded-xl bg-[#101310] border border-[#282F28]">
+                    <p className="font-bold text-xs text-[#F4F7F2]">{exp.title}</p>
+                    <p className="text-[#70796F]">
                       {exp.organization} • {exp.duration}
                     </p>
                     {exp.description && (
-                      <p className="text-slate-600 dark:text-slate-300">{exp.description}</p>
+                      <p className="text-[#A1AAA0]">{exp.description}</p>
                     )}
                   </div>
                 ))}
@@ -474,7 +470,7 @@ export const StudentProfile = () => {
         <Modal isOpen={isEditOpen} onClose={() => setIsEditOpen(false)} title="Edit Student Profile">
           <form onSubmit={handleEditSubmit} className="space-y-4 max-h-[75vh] overflow-y-auto px-1">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+              <label className="block text-xs font-semibold text-[#A1AAA0] mb-1.5">
                 Full Name
               </label>
               <input
@@ -482,50 +478,50 @@ export const StudentProfile = () => {
                 required
                 value={editFormData.name}
                 onChange={(e) => setEditFormData({ ...editFormData, name: e.target.value })}
-                className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-2.5 text-sm text-slate-800 dark:text-slate-200 focus:outline-none"
+                className="input-surface"
               />
             </div>
 
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-[#A1AAA0] mb-1.5">
                   College / Campus
                 </label>
                 <input
                   type="text"
                   value={editFormData.college}
                   onChange={(e) => setEditFormData({ ...editFormData, college: e.target.value })}
-                  className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-2.5 text-sm text-slate-800 dark:text-slate-200 focus:outline-none"
+                  className="input-surface"
                 />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-[#A1AAA0] mb-1.5">
                   Major / Course
                 </label>
                 <input
                   type="text"
                   value={editFormData.course}
                   onChange={(e) => setEditFormData({ ...editFormData, course: e.target.value })}
-                  className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-2.5 text-sm text-slate-800 dark:text-slate-200 focus:outline-none"
+                  className="input-surface"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+              <label className="block text-xs font-semibold text-[#A1AAA0] mb-1.5">
                 Bio & Vision
               </label>
               <textarea
                 rows={3}
                 value={editFormData.bio}
                 onChange={(e) => setEditFormData({ ...editFormData, bio: e.target.value })}
-                className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-2.5 text-sm text-slate-800 dark:text-slate-200 focus:outline-none"
+                className="input-surface resize-none"
               />
             </div>
 
             {/* Skills */}
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+              <label className="block text-xs font-semibold text-[#A1AAA0] mb-1.5">
                 Skills (Add skill and press Enter)
               </label>
               <input
@@ -546,13 +542,13 @@ export const StudentProfile = () => {
                   }
                 }}
                 placeholder="e.g. react, node, pytorch, figma..."
-                className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-2.5 text-sm text-slate-800 dark:text-slate-200 focus:outline-none"
+                className="input-surface"
               />
               <div className="flex flex-wrap gap-1 mt-2">
                 {(editFormData.skills || []).map((s) => (
                   <span
                     key={s}
-                    className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-lg bg-brand-50 text-brand-700 dark:bg-brand-950 dark:text-brand-300"
+                    className="inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-lg bg-[#1B211B] text-[#B7FF5A] border border-[#282F28]"
                   >
                     <span>{s}</span>
                     <button
@@ -563,6 +559,7 @@ export const StudentProfile = () => {
                           skills: editFormData.skills.filter((sk) => sk !== s),
                         })
                       }
+                      className="text-[#70796F] hover:text-rose-400 font-bold"
                     >
                       ×
                     </button>
@@ -573,7 +570,7 @@ export const StudentProfile = () => {
 
             {/* Portfolio Links */}
             <div className="space-y-2">
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+              <label className="block text-xs font-semibold text-[#A1AAA0]">
                 Portfolio Links
               </label>
               <input
@@ -586,7 +583,7 @@ export const StudentProfile = () => {
                     portfolioLinks: { ...editFormData.portfolioLinks, github: e.target.value },
                   })
                 }
-                className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-2 text-xs text-slate-800 dark:text-slate-200 focus:outline-none"
+                className="input-surface"
               />
               <input
                 type="url"
@@ -598,22 +595,22 @@ export const StudentProfile = () => {
                     portfolioLinks: { ...editFormData.portfolioLinks, linkedin: e.target.value },
                   })
                 }
-                className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-2 text-xs text-slate-800 dark:text-slate-200 focus:outline-none"
+                className="input-surface"
               />
             </div>
 
-            <div className="flex justify-end gap-2 pt-3">
+            <div className="flex justify-end gap-2.5 pt-3">
               <button
                 type="button"
                 onClick={() => setIsEditOpen(false)}
-                className="rounded-xl px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100"
+                className="btn-secondary"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={savingProfile}
-                className="rounded-xl bg-brand-600 px-5 py-2 text-xs font-bold text-white hover:bg-brand-700 disabled:opacity-50"
+                className="btn-primary"
               >
                 {savingProfile ? 'Saving...' : 'Save Profile'}
               </button>
@@ -630,13 +627,13 @@ export const StudentProfile = () => {
       >
         <form onSubmit={handleRequestSkillSession} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-xs font-semibold text-[#A1AAA0] mb-1.5">
               Select Skill You Want to Learn
             </label>
             <select
               value={selectedSkill}
               onChange={(e) => setSelectedSkill(e.target.value)}
-              className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 text-sm text-slate-800 dark:text-slate-200 focus:outline-none"
+              className="input-surface"
             >
               {(student.skills || []).map((sk) => (
                 <option key={sk} value={sk}>
@@ -647,7 +644,7 @@ export const StudentProfile = () => {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-xs font-semibold text-[#A1AAA0] mb-1.5">
               Topic or Question *
             </label>
             <input
@@ -656,18 +653,18 @@ export const StudentProfile = () => {
               value={sessionTopic}
               onChange={(e) => setSessionTopic(e.target.value)}
               placeholder="e.g. Debugging state management or setting up Docker"
-              className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-2.5 text-sm text-slate-800 dark:text-slate-200 focus:outline-none"
+              className="input-surface"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-xs font-semibold text-[#A1AAA0] mb-1.5">
               Duration
             </label>
             <select
               value={sessionDuration}
               onChange={(e) => setSessionDuration(parseInt(e.target.value, 10))}
-              className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 text-sm text-slate-800 dark:text-slate-200 focus:outline-none"
+              className="input-surface"
             >
               <option value={30}>30 Minutes</option>
               <option value={45}>45 Minutes (Recommended)</option>
@@ -675,18 +672,18 @@ export const StudentProfile = () => {
             </select>
           </div>
 
-          <div className="flex justify-end gap-2 pt-2">
+          <div className="flex justify-end gap-2.5 pt-2">
             <button
               type="button"
               onClick={() => setIsSkillModalOpen(false)}
-              className="rounded-xl px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100"
+              className="btn-secondary"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={sendingSession}
-              className="rounded-xl bg-brand-600 px-5 py-2 text-xs font-bold text-white hover:bg-brand-700 disabled:opacity-50"
+              className="btn-primary"
             >
               {sendingSession ? 'Sending Request...' : 'Send Request'}
             </button>

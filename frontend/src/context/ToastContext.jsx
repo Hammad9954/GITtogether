@@ -31,13 +31,13 @@ export const ToastProvider = ({ children }) => {
   const getToastIcon = (type) => {
     switch (type) {
       case 'success':
-        return <CheckCircle2 className="w-5 h-5 text-emerald-500 flex-shrink-0" />;
+        return <CheckCircle2 className="w-5 h-5 text-[#B7FF5A] flex-shrink-0" />;
       case 'error':
-        return <AlertCircle className="w-5 h-5 text-rose-500 flex-shrink-0" />;
+        return <AlertCircle className="w-5 h-5 text-rose-400 flex-shrink-0" />;
       case 'warning':
-        return <AlertTriangle className="w-5 h-5 text-amber-500 flex-shrink-0" />;
+        return <AlertTriangle className="w-5 h-5 text-amber-400 flex-shrink-0" />;
       default:
-        return <Info className="w-5 h-5 text-brand-500 flex-shrink-0" />;
+        return <Info className="w-5 h-5 text-[#B7FF5A] flex-shrink-0" />;
     }
   };
 
@@ -45,19 +45,21 @@ export const ToastProvider = ({ children }) => {
     <ToastContext.Provider value={{ toast }}>
       {children}
       {/* Toast viewport */}
-      <div className="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none">
+      <div className="fixed bottom-5 right-5 z-50 flex flex-col gap-2.5 max-w-sm w-full pointer-events-none px-4 sm:px-0">
         {toasts.map((t) => (
           <div
             key={t.id}
-            className="pointer-events-auto flex items-start gap-3 p-4 rounded-xl shadow-lg border bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 animate-fade-in"
+            role="status"
+            className="pointer-events-auto flex items-start gap-3 p-4 rounded-xl shadow-elevated border border-[#282F28] bg-[#151915] text-[#F4F7F2] animate-fade-in"
           >
             {getToastIcon(t.type)}
-            <p className="text-sm font-medium text-slate-800 dark:text-slate-200 flex-1 leading-snug">
+            <p className="text-sm font-medium text-[#F4F7F2] flex-1 leading-snug">
               {t.message}
             </p>
             <button
               onClick={() => removeToast(t.id)}
-              className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+              aria-label="Dismiss notification"
+              className="text-[#70796F] hover:text-[#F4F7F2] transition-colors p-0.5 rounded-lg hover:bg-[#1B211B]"
             >
               <X className="w-4 h-4" />
             </button>

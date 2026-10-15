@@ -28,7 +28,7 @@ import api from '../api/client.js';
 import { useToast } from '../context/ToastContext.jsx';
 import Modal from '../components/Modal.jsx';
 
-const CHART_COLORS = ['#4f46e5', '#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#06b6d4'];
+const CHART_COLORS = ['#B7FF5A', '#384238', '#70796F', '#CAFF8C', '#A1AAA0', '#1B211B'];
 
 export const AdminDashboard = () => {
   const { toast } = useToast();
@@ -184,34 +184,34 @@ export const AdminDashboard = () => {
 
   if (loading) {
     return (
-      <div className="py-12 text-center">
-        <Loader2 className="w-8 h-8 animate-spin text-brand-600 mx-auto" />
+      <div className="py-24 text-center">
+        <Loader2 className="w-8 h-8 animate-spin text-[#B7FF5A] mx-auto" />
       </div>
     );
   }
 
   return (
-    <div className="space-y-6 animate-fade-in py-4">
+    <div className="space-y-6 animate-fade-in py-4 max-w-7xl mx-auto">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
-            <ShieldAlert className="w-7 h-7 text-purple-600" />
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#F4F7F2] flex items-center gap-2.5">
+            <ShieldAlert className="w-7 h-7 text-[#B7FF5A]" />
             <span>Admin & Moderation Panel</span>
           </h1>
-          <p className="text-sm text-slate-500 dark:text-slate-400">
-            Platform governance, telemetry analytics, and community safety enforcement
+          <p className="text-sm text-[#A1AAA0] mt-1">
+            Platform governance, telemetry analytics, and community safety enforcement.
           </p>
         </div>
 
         {/* Tab Switcher */}
-        <div className="flex rounded-xl bg-slate-100 dark:bg-slate-800 p-1 text-xs font-bold self-start sm:self-auto">
+        <div className="flex rounded-xl bg-[#101310] border border-[#282F28] p-1 text-xs font-semibold self-start sm:self-auto">
           <button
             onClick={() => setActiveTab('analytics')}
             className={`rounded-lg px-3.5 py-1.5 transition-all ${
               activeTab === 'analytics'
-                ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-sm'
-                : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
+                ? 'bg-[#1B211B] text-[#B7FF5A] border border-[#282F28] shadow-sm'
+                : 'text-[#70796F] hover:text-[#F4F7F2]'
             }`}
           >
             Analytics & Charts
@@ -220,8 +220,8 @@ export const AdminDashboard = () => {
             onClick={() => setActiveTab('users')}
             className={`rounded-lg px-3.5 py-1.5 transition-all ${
               activeTab === 'users'
-                ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-sm'
-                : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
+                ? 'bg-[#1B211B] text-[#B7FF5A] border border-[#282F28] shadow-sm'
+                : 'text-[#70796F] hover:text-[#F4F7F2]'
             }`}
           >
             User Accounts
@@ -230,8 +230,8 @@ export const AdminDashboard = () => {
             onClick={() => setActiveTab('reports')}
             className={`rounded-lg px-3.5 py-1.5 transition-all ${
               activeTab === 'reports'
-                ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-sm'
-                : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
+                ? 'bg-[#1B211B] text-[#B7FF5A] border border-[#282F28] shadow-sm'
+                : 'text-[#70796F] hover:text-[#F4F7F2]'
             }`}
           >
             Safety Reports ({metrics?.pendingReports || 0})
@@ -244,27 +244,27 @@ export const AdminDashboard = () => {
         <div className="space-y-6">
           {/* Stat Cards Grid */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-soft">
-              <span className="text-xs font-semibold text-slate-400">TOTAL USERS</span>
-              <p className="text-2xl font-black text-slate-900 dark:text-white mt-1">
+            <div className="p-5 rounded-2xl bg-[#151915] border border-[#282F28]">
+              <span className="text-[11px] font-mono uppercase tracking-wider text-[#70796F]">TOTAL USERS</span>
+              <p className="text-2xl font-mono font-black text-[#F4F7F2] mt-1">
                 {metrics.totalUsers}
               </p>
             </div>
-            <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-soft">
-              <span className="text-xs font-semibold text-slate-400">TOTAL PROJECTS</span>
-              <p className="text-2xl font-black text-slate-900 dark:text-white mt-1">
+            <div className="p-5 rounded-2xl bg-[#151915] border border-[#282F28]">
+              <span className="text-[11px] font-mono uppercase tracking-wider text-[#70796F]">TOTAL PROJECTS</span>
+              <p className="text-2xl font-mono font-black text-[#F4F7F2] mt-1">
                 {metrics.totalProjects}
               </p>
             </div>
-            <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-soft">
-              <span className="text-xs font-semibold text-slate-400">APPLICATIONS</span>
-              <p className="text-2xl font-black text-slate-900 dark:text-white mt-1">
+            <div className="p-5 rounded-2xl bg-[#151915] border border-[#282F28]">
+              <span className="text-[11px] font-mono uppercase tracking-wider text-[#70796F]">APPLICATIONS</span>
+              <p className="text-2xl font-mono font-black text-[#F4F7F2] mt-1">
                 {metrics.totalApplications}
               </p>
             </div>
-            <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-soft">
-              <span className="text-xs font-semibold text-slate-400">PENDING REPORTS</span>
-              <p className="text-2xl font-black text-rose-600 mt-1">
+            <div className="p-5 rounded-2xl bg-[#151915] border border-[#282F28]">
+              <span className="text-[11px] font-mono uppercase tracking-wider text-[#70796F]">PENDING REPORTS</span>
+              <p className="text-2xl font-mono font-black text-rose-400 mt-1">
                 {metrics.pendingReports}
               </p>
             </div>
@@ -273,33 +273,33 @@ export const AdminDashboard = () => {
           {/* Visual Recharts Section */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Projects by Category BarChart */}
-            <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-soft space-y-4">
-              <h3 className="text-base font-bold text-slate-900 dark:text-white">
+            <div className="p-6 rounded-2xl bg-[#151915] border border-[#282F28] space-y-4">
+              <h3 className="text-base font-bold text-[#F4F7F2]">
                 Projects Distribution by Category
               </h3>
               <div className="h-64">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={categoryData}>
-                    <XAxis dataKey="category" tick={{ fontSize: 10 }} />
-                    <YAxis tick={{ fontSize: 10 }} allowDecimals={false} />
+                    <XAxis dataKey="category" tick={{ fill: '#70796F', fontSize: 10 }} />
+                    <YAxis tick={{ fill: '#70796F', fontSize: 10 }} allowDecimals={false} />
                     <Tooltip
                       contentStyle={{
                         borderRadius: '12px',
                         fontSize: '12px',
-                        backgroundColor: '#0f172a',
-                        color: '#fff',
-                        border: 'none',
+                        backgroundColor: '#101310',
+                        color: '#F4F7F2',
+                        border: '1px solid #282F28',
                       }}
                     />
-                    <Bar dataKey="count" fill="#4f46e5" radius={[6, 6, 0, 0]} />
+                    <Bar dataKey="count" fill="#B7FF5A" radius={[6, 6, 0, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
             </div>
 
             {/* Application Pipeline Status PieChart */}
-            <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-soft space-y-4">
-              <h3 className="text-base font-bold text-slate-900 dark:text-white">
+            <div className="p-6 rounded-2xl bg-[#151915] border border-[#282F28] space-y-4">
+              <h3 className="text-base font-bold text-[#F4F7F2]">
                 Application Review Status Pipeline
               </h3>
               <div className="h-64 flex items-center justify-center">
@@ -323,11 +323,19 @@ export const AdminDashboard = () => {
                           />
                         ))}
                       </Pie>
-                      <Tooltip />
+                      <Tooltip
+                        contentStyle={{
+                          borderRadius: '12px',
+                          fontSize: '12px',
+                          backgroundColor: '#101310',
+                          color: '#F4F7F2',
+                          border: '1px solid #282F28',
+                        }}
+                      />
                     </PieChart>
                   </ResponsiveContainer>
                 ) : (
-                  <p className="text-xs text-slate-400">No application telemetry available</p>
+                  <p className="text-xs text-[#70796F]">No application telemetry available</p>
                 )}
               </div>
             </div>
@@ -337,18 +345,18 @@ export const AdminDashboard = () => {
 
       {/* TAB 2: USER MANAGEMENT */}
       {activeTab === 'users' && (
-        <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-soft space-y-4">
+        <div className="p-6 sm:p-8 rounded-2xl bg-[#151915] border border-[#282F28] space-y-4">
           <div className="flex items-center gap-2">
             <input
               type="text"
               value={userSearch}
               onChange={(e) => setUserSearch(e.target.value)}
               placeholder="Search user by name, email, or college..."
-              className="flex-1 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-3.5 py-2 text-xs text-slate-800 dark:text-slate-200 focus:outline-none"
+              className="flex-1 input-surface px-4 py-2 text-xs rounded-xl"
             />
             <button
               onClick={fetchUsers}
-              className="rounded-xl bg-brand-600 px-4 py-2 text-xs font-bold text-white hover:bg-brand-700"
+              className="btn-primary px-4 py-2 text-xs font-semibold"
             >
               Filter
             </button>
@@ -356,54 +364,54 @@ export const AdminDashboard = () => {
 
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="border-b border-slate-200 dark:border-slate-800 text-slate-400 font-semibold uppercase">
+              <thead className="border-b border-[#282F28] text-[#70796F] font-mono uppercase">
                 <tr>
-                  <th className="py-3 px-2">Student</th>
-                  <th className="py-3 px-2">College</th>
-                  <th className="py-3 px-2">Role</th>
-                  <th className="py-3 px-2">Status</th>
-                  <th className="py-3 px-2 text-right">Actions</th>
+                  <th className="py-3 px-3">Student</th>
+                  <th className="py-3 px-3">College</th>
+                  <th className="py-3 px-3">Role</th>
+                  <th className="py-3 px-3">Status</th>
+                  <th className="py-3 px-3 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+              <tbody className="divide-y divide-[#282F28]/50">
                 {usersList.map((u) => (
-                  <tr key={u._id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50">
-                    <td className="py-3 px-2">
-                      <p className="font-bold text-slate-900 dark:text-white">{u.name}</p>
-                      <p className="text-slate-400">{u.email}</p>
+                  <tr key={u._id} className="hover:bg-[#1B211B] transition-colors">
+                    <td className="py-3 px-3">
+                      <p className="font-bold text-[#F4F7F2]">{u.name}</p>
+                      <p className="text-[#70796F] text-[11px]">{u.email}</p>
                     </td>
-                    <td className="py-3 px-2 text-slate-600 dark:text-slate-300">
+                    <td className="py-3 px-3 text-[#A1AAA0]">
                       {u.college || '—'}
                     </td>
-                    <td className="py-3 px-2">
+                    <td className="py-3 px-3">
                       <span
-                        className={`font-bold px-2 py-0.5 rounded-full ${
+                        className={`font-mono text-[10px] font-bold px-2 py-0.5 rounded-full border ${
                           u.role === 'admin'
-                            ? 'bg-purple-100 text-purple-700 dark:bg-purple-950 dark:text-purple-300'
-                            : 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300'
+                            ? 'bg-[#B7FF5A]/10 text-[#B7FF5A] border-[#B7FF5A]/20'
+                            : 'bg-[#101310] text-[#70796F] border-[#282F28]'
                         }`}
                       >
                         {u.role.toUpperCase()}
                       </span>
                     </td>
-                    <td className="py-3 px-2">
+                    <td className="py-3 px-3">
                       {u.isSuspended ? (
-                        <span className="text-rose-600 font-bold">SUSPENDED</span>
+                        <span className="text-rose-400 font-mono font-bold text-[11px]">SUSPENDED</span>
                       ) : (
-                        <span className="text-emerald-600 font-bold">ACTIVE</span>
+                        <span className="text-[#B7FF5A] font-mono font-bold text-[11px]">ACTIVE</span>
                       )}
                     </td>
-                    <td className="py-3 px-2 text-right space-x-2">
+                    <td className="py-3 px-3 text-right space-x-3">
                       <button
                         onClick={() => handleRoleToggle(u._id, u.role)}
-                        className="font-semibold text-brand-600 hover:underline"
+                        className="font-semibold text-[#B7FF5A] hover:underline"
                       >
                         {u.role === 'admin' ? 'Demote to Student' : 'Promote Admin'}
                       </button>
                       <button
                         onClick={() => handleToggleSuspension(u)}
                         className={`font-semibold ${
-                          u.isSuspended ? 'text-emerald-600' : 'text-rose-600'
+                          u.isSuspended ? 'text-[#B7FF5A]' : 'text-rose-400'
                         } hover:underline`}
                       >
                         {u.isSuspended ? 'Unsuspend' : 'Suspend'}
@@ -422,61 +430,61 @@ export const AdminDashboard = () => {
         <div className="space-y-4">
           {reportsLoading ? (
             <div className="py-12 text-center">
-              <Loader2 className="w-8 h-8 animate-spin text-brand-600 mx-auto" />
+              <Loader2 className="w-8 h-8 animate-spin text-[#B7FF5A] mx-auto" />
             </div>
           ) : reports.length === 0 ? (
-            <div className="p-12 text-center rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 text-xs text-slate-500">
+            <div className="p-12 text-center rounded-2xl bg-[#151915] border border-[#282F28] text-xs text-[#70796F]">
               No reports filed. The community is clean and compliant!
             </div>
           ) : (
             reports.map((rep) => (
               <div
                 key={rep._id}
-                className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-soft space-y-3"
+                className="p-5 rounded-2xl bg-[#151915] border border-[#282F28] space-y-3"
               >
                 <div className="flex items-start justify-between">
                   <div>
-                    <span className="text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-rose-50 text-rose-700 dark:bg-rose-950 dark:text-rose-300">
+                    <span className="text-[11px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-rose-500/10 text-rose-400 border border-rose-500/20">
                       Reason: {rep.reason.replace('_', ' ')}
                     </span>
-                    <h4 className="font-bold text-sm text-slate-900 dark:text-white mt-1">
+                    <h4 className="font-bold text-sm text-[#F4F7F2] mt-1.5">
                       Target: {rep.targetType.toUpperCase()} - {rep.targetName || rep.targetId}
                     </h4>
-                    <p className="text-xs text-slate-500">Reported by: {rep.reporter?.name}</p>
+                    <p className="text-xs text-[#70796F] mt-0.5">Reported by: <span className="text-[#A1AAA0]">{rep.reporter?.name}</span></p>
                   </div>
 
                   <span
-                    className={`text-xs font-bold px-2.5 py-0.5 rounded-full ${
+                    className={`text-xs font-mono font-bold px-2.5 py-0.5 rounded-full border ${
                       rep.status === 'resolved'
-                        ? 'bg-emerald-100 text-emerald-800'
-                        : 'bg-amber-100 text-amber-800'
+                        ? 'bg-[#B7FF5A]/10 text-[#B7FF5A] border-[#B7FF5A]/30'
+                        : 'bg-amber-400/10 text-amber-300 border-amber-400/30'
                     }`}
                   >
                     {rep.status.toUpperCase()}
                   </span>
                 </div>
 
-                <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800 text-xs text-slate-700 dark:text-slate-300">
+                <div className="p-3 rounded-xl bg-[#101310] border border-[#282F28] text-xs text-[#A1AAA0]">
                   <p className="italic">"{rep.description}"</p>
                 </div>
 
                 {rep.status === 'pending' && (
-                  <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+                  <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-[#282F28]">
                     <button
                       onClick={() => handleResolveReport(rep._id, 'none')}
-                      className="px-3 py-1.5 text-xs font-bold text-slate-600 hover:bg-slate-100 rounded-xl"
+                      className="px-3.5 py-1.5 text-xs font-semibold text-[#70796F] hover:text-[#F4F7F2] hover:bg-[#1B211B] rounded-xl transition-colors border border-[#282F28]"
                     >
                       Dismiss Report
                     </button>
                     <button
                       onClick={() => handleResolveReport(rep._id, 'content_removed')}
-                      className="px-3 py-1.5 text-xs font-bold bg-amber-600 text-white rounded-xl shadow hover:bg-amber-700"
+                      className="px-3.5 py-1.5 text-xs font-semibold bg-amber-500/10 text-amber-300 border border-amber-500/20 rounded-xl hover:bg-amber-500/20 transition-colors"
                     >
                       Take Down Content
                     </button>
                     <button
                       onClick={() => handleResolveReport(rep._id, 'user_suspended')}
-                      className="px-3 py-1.5 text-xs font-bold bg-rose-600 text-white rounded-xl shadow hover:bg-rose-700"
+                      className="px-3.5 py-1.5 text-xs font-semibold bg-rose-500/20 text-rose-300 border border-rose-500/30 rounded-xl hover:bg-rose-500/30 transition-colors"
                     >
                       Suspend Offender
                     </button>
@@ -495,13 +503,13 @@ export const AdminDashboard = () => {
         title={`Suspend User: ${selectedUser?.name}`}
       >
         <form onSubmit={handleConfirmSuspension} className="space-y-4">
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-[#A1AAA0]">
             Suspending will immediately lock this student out of project applications, messaging, and
             collaboration workspaces.
           </p>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-xs font-semibold text-[#A1AAA0] mb-1.5">
               Reason for Suspension *
             </label>
             <textarea
@@ -509,21 +517,21 @@ export const AdminDashboard = () => {
               required
               value={suspensionReason}
               onChange={(e) => setSuspensionReason(e.target.value)}
-              className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-2.5 text-xs text-slate-800 dark:text-slate-200 focus:outline-none"
+              className="input-surface w-full p-2.5 text-xs rounded-xl"
             />
           </div>
 
-          <div className="flex justify-end gap-2 pt-2">
+          <div className="flex justify-end gap-2.5 pt-3 border-t border-[#282F28]">
             <button
               type="button"
               onClick={() => setSuspendModalOpen(false)}
-              className="rounded-xl px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100"
+              className="px-4 py-2 text-xs font-semibold text-[#70796F] hover:text-[#F4F7F2] transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="rounded-xl bg-rose-600 px-5 py-2 text-xs font-bold text-white hover:bg-rose-700"
+              className="px-5 py-2 text-xs font-semibold text-rose-300 bg-rose-500/20 border border-rose-500/30 rounded-xl hover:bg-rose-500/30 transition-colors"
             >
               Confirm Suspension
             </button>

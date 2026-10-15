@@ -75,4 +75,51 @@ describe('Authentication & Authorization Suite', () => {
     expect(res.status).toBe(401);
     expect(res.body.success).toBe(false);
   });
+
+  it('should reject registration if password does not meet strong password requirements', async () => {
+    // Too short (< 8 chars)
+    let res = await request(app).post('/api/v1/auth/register').send({
+      ...testUser,
+      email: 'short@college.edu',
+      password: 'Pass1!',
+    });
+    expect(res.status).toBe(400);
+    expect(res.body.success).toBe(false);
+
+    // Missing uppercase
+    res = await request(app).post('/api/v1/auth/register').send({
+      ...testUser,
+      email: 'noupper@college.edu',
+      password: 'password123!',
+    });
+    expect(res.status).toBe(400);
+    expect(res.body.success).toBe(false);
+
+    // Missing lowercase
+    res = await request(app).post('/api/v1/auth/register').send({
+      ...testUser,
+      email: 'nolower@college.edu',
+      password: 'PASSWORD123!',
+    });
+    expect(res.status).toBe(400);
+    expect(res.body.success).toBe(false);
+
+    // Missing number
+    res = await request(app).post('/api/v1/auth/register').send({
+      ...testUser,
+      email: 'nonumber@college.edu',
+      password: 'Password!@#$',
+    });
+    expect(res.status).toBe(400);
+    expect(res.body.success).toBe(false);
+
+    // Missing special character
+    res = await request(app).post('/api/v1/auth/register').send({
+      ...testUser,
+      email: 'nospecial@college.edu',
+      password: 'Password1234',
+    });
+    expect(res.status).toBe(400);
+    expect(res.body.success).toBe(false);
+  });
 });

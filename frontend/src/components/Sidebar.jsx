@@ -12,8 +12,6 @@ import {
   Star,
   ShieldAlert,
   Settings,
-  Sparkles,
-  ChevronRight,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext.jsx';
 
@@ -47,13 +45,14 @@ export const Sidebar = ({ isOpen, onClose }) => {
       {/* Mobile backdrop */}
       {isOpen && (
         <div
-          className="fixed inset-0 z-40 bg-slate-900/50 backdrop-blur-sm lg:hidden"
+          className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm lg:hidden"
           onClick={onClose}
+          aria-hidden="true"
         />
       )}
 
       <aside
-        className={`fixed top-16 bottom-0 left-0 z-40 w-64 border-r border-slate-200/80 bg-white/95 dark:border-slate-800/80 dark:bg-slate-900/95 backdrop-blur-md transition-transform duration-300 ease-in-out lg:translate-x-0 ${
+        className={`fixed top-16 bottom-0 left-0 z-40 w-64 border-r border-[#282F28] bg-[#101310] transition-transform duration-200 ease-in-out lg:translate-x-0 ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         } flex flex-col justify-between`}
       >
@@ -66,19 +65,19 @@ export const Sidebar = ({ isOpen, onClose }) => {
                 to={item.path}
                 onClick={() => onClose && onClose()}
                 className={({ isActive }) =>
-                  `flex items-center justify-between rounded-xl px-3.5 py-2.5 text-sm font-semibold transition-all ${
+                  `flex items-center justify-between rounded-xl px-3 py-2 text-xs font-semibold transition-all duration-150 ${
                     isActive
-                      ? 'bg-brand-50 text-brand-700 shadow-sm shadow-brand-500/10 dark:bg-brand-950/60 dark:text-brand-300'
-                      : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800/70 dark:hover:text-slate-200'
+                      ? 'bg-[#1B211B] text-[#B7FF5A] border border-[#282F28]'
+                      : 'text-[#A1AAA0] hover:bg-[#151915] hover:text-[#F4F7F2]'
                   }`
                 }
               >
-                <div className="flex items-center gap-3">
-                  <Icon className="w-5 h-5 flex-shrink-0" />
+                <div className="flex items-center gap-2.5">
+                  <Icon className="w-4 h-4 flex-shrink-0" />
                   <span>{item.label}</span>
                 </div>
                 {item.badge && (
-                  <span className="rounded-md bg-purple-100 px-1.5 py-0.5 text-[10px] font-bold text-purple-700 dark:bg-purple-950 dark:text-purple-300">
+                  <span className="rounded-md bg-[#B7FF5A]/15 px-1.5 py-0.5 text-[10px] font-bold text-[#B7FF5A] border border-[#B7FF5A]/30">
                     {item.badge}
                   </span>
                 )}
@@ -89,18 +88,18 @@ export const Sidebar = ({ isOpen, onClose }) => {
 
         {/* User Quick Card at bottom of sidebar */}
         {user && (
-          <div className="p-3 border-t border-slate-100 dark:border-slate-800">
-            <div className="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60">
+          <div className="p-3 border-t border-[#282F28]">
+            <div className="flex items-center justify-between p-2.5 rounded-xl bg-[#151915] border border-[#282F28]">
               <div className="flex items-center gap-2.5 overflow-hidden">
-                <div className="h-9 w-9 rounded-full bg-brand-600 text-white font-bold text-xs flex items-center justify-center flex-shrink-0 uppercase">
+                <div className="h-8 w-8 rounded-lg bg-[#1B211B] border border-[#282F28] text-[#B7FF5A] font-bold text-xs flex items-center justify-center flex-shrink-0 uppercase">
                   {user.name.charAt(0)}
                 </div>
                 <div className="truncate text-left text-xs">
-                  <p className="font-semibold text-slate-800 dark:text-slate-200 truncate">
+                  <p className="font-semibold text-[#F4F7F2] truncate">
                     {user.name}
                   </p>
-                  <p className="text-slate-500 dark:text-slate-400">
-                    Reputation: <span className="text-brand-600 font-bold">{user.reputationScore || 100}</span>
+                  <p className="text-[#70796F]">
+                    Rep: <span className="text-[#B7FF5A] font-bold">{user.reputationScore || 100}</span>
                   </p>
                 </div>
               </div>

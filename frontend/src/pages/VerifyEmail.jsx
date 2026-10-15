@@ -43,7 +43,6 @@ export const VerifyEmail = () => {
     if (!code) return;
 
     setLoading(true);
-    // In our backend, verifyEmail checks token or code
     const result = await verifyEmail({ code });
     setLoading(false);
 
@@ -71,49 +70,49 @@ export const VerifyEmail = () => {
   };
 
   return (
-    <div className="flex min-h-[calc(100vh-10rem)] items-center justify-center py-8">
+    <div className="flex min-h-[calc(100vh-10rem)] items-center justify-center py-8 px-4">
       <div className="w-full max-w-md space-y-6 text-center">
-        <div className="inline-flex h-16 w-16 items-center justify-center rounded-3xl bg-brand-50 text-brand-600 dark:bg-brand-950 dark:text-brand-400 shadow-lg shadow-brand-500/20">
-          <MailCheck className="w-8 h-8" />
+        <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[#151915] border border-[#282F28] text-[#B7FF5A] shadow-card">
+          <MailCheck className="w-7 h-7" />
         </div>
 
         <div className="space-y-2">
-          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#F4F7F2]">
             Verify your College Email
           </h2>
-          <p className="text-sm text-slate-500 dark:text-slate-400 max-w-sm mx-auto">
+          <p className="text-xs sm:text-sm text-[#A1AAA0] max-w-sm mx-auto">
             We sent a 6-digit verification code to{' '}
-            <strong className="text-slate-800 dark:text-slate-200">{emailParam || 'your college email'}</strong>
+            <strong className="text-[#F4F7F2] font-semibold">{emailParam || 'your college email'}</strong>
           </p>
         </div>
 
         {/* Development simulated code helper box */}
         {initialCode && (
-          <div className="p-3.5 rounded-2xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 text-left text-xs space-y-1">
-            <div className="flex items-center gap-1.5 font-bold text-emerald-800 dark:text-emerald-300">
-              <Sparkles className="w-4 h-4 text-emerald-600" />
+          <div className="p-3.5 rounded-xl bg-[#101310] border border-[#282F28] text-left text-xs space-y-1">
+            <div className="flex items-center gap-1.5 font-bold text-[#B7FF5A]">
+              <Sparkles className="w-3.5 h-3.5" />
               <span>Campus Dev Mode: Simulated Code Detected</span>
             </div>
-            <p className="text-emerald-700 dark:text-emerald-400">
-              Your test verification code is <strong className="font-mono text-sm">{initialCode}</strong>.
+            <p className="text-[#A1AAA0]">
+              Your test verification code is <strong className="font-mono text-sm text-[#F4F7F2]">{initialCode}</strong>.
               It has been pre-filled below.
             </p>
           </div>
         )}
 
         {isSuccess ? (
-          <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 shadow-soft border border-emerald-200 dark:border-emerald-800 text-center space-y-3">
-            <CheckCircle2 className="w-12 h-12 text-emerald-500 mx-auto" />
-            <h3 className="text-lg font-bold text-slate-900 dark:text-white">
+          <div className="p-6 rounded-2xl bg-[#151915] shadow-card border border-[#B7FF5A]/40 text-center space-y-3">
+            <CheckCircle2 className="w-10 h-10 text-[#B7FF5A] mx-auto" />
+            <h3 className="text-base font-bold text-[#F4F7F2]">
               Email Verified Successfully!
             </h3>
-            <p className="text-sm text-slate-500">Redirecting to your student dashboard...</p>
+            <p className="text-xs text-[#A1AAA0]">Redirecting to your student workspace...</p>
           </div>
         ) : (
-          <div className="rounded-2xl bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-soft border border-slate-200/80 dark:border-slate-800/80 text-left">
+          <div className="rounded-2xl bg-[#151915] p-6 sm:p-8 shadow-card border border-[#282F28] text-left">
             <form onSubmit={handleCodeSubmit} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-[#A1AAA0] mb-1.5">
                   6-Digit Verification Code
                 </label>
                 <input
@@ -123,39 +122,39 @@ export const VerifyEmail = () => {
                   value={code}
                   onChange={(e) => setCode(e.target.value.trim())}
                   placeholder="e.g. 123456"
-                  className="w-full text-center tracking-widest font-mono text-xl rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 py-3 text-slate-800 dark:text-slate-200 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                  className="w-full text-center tracking-widest font-mono text-2xl rounded-xl border border-[#282F28] bg-[#101310] py-3 text-[#F4F7F2] placeholder-[#70796F] focus:outline-none focus:border-[#B7FF5A] focus:ring-1 focus:ring-[#B7FF5A]"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={loading || code.length < 4}
-                className="w-full flex items-center justify-center gap-2 rounded-xl bg-brand-600 px-4 py-3 text-sm font-bold text-white shadow-md shadow-brand-500/20 hover:bg-brand-700 transition-all disabled:opacity-50"
+                className="w-full flex items-center justify-center gap-2 rounded-xl bg-[#B7FF5A] px-4 py-2.5 text-sm font-bold text-[#090B0A] hover:bg-[#CAFF8C] transition-all disabled:opacity-50"
               >
                 {loading ? (
                   <>
-                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <Loader2 className="w-4 h-4 animate-spin text-[#090B0A]" />
                     <span>Verifying...</span>
                   </>
                 ) : (
                   <>
                     <span>Confirm & Activate Profile</span>
-                    <ArrowRight className="w-4 h-4" />
+                    <ArrowRight className="w-4 h-4 stroke-[2.5]" />
                   </>
                 )}
               </button>
             </form>
 
-            <div className="mt-6 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+            <div className="mt-6 flex items-center justify-between text-xs text-[#70796F]">
               <button
                 onClick={handleResend}
                 disabled={resending}
-                className="inline-flex items-center gap-1 font-semibold text-brand-600 dark:text-brand-400 hover:underline disabled:opacity-50"
+                className="inline-flex items-center gap-1 font-semibold text-[#B7FF5A] hover:underline disabled:opacity-50"
               >
                 <RefreshCw className={`w-3.5 h-3.5 ${resending ? 'animate-spin' : ''}`} />
                 <span>Resend Code</span>
               </button>
-              <Link to="/dashboard" className="hover:underline">
+              <Link to="/dashboard" className="text-[#A1AAA0] hover:text-[#F4F7F2] transition-colors">
                 Skip for now →
               </Link>
             </div>

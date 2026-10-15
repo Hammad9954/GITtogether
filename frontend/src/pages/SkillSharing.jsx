@@ -133,44 +133,44 @@ export const SkillSharing = () => {
 
   if (loading) {
     return (
-      <div className="py-12 text-center">
-        <Loader2 className="w-8 h-8 animate-spin text-brand-600 mx-auto" />
+      <div className="py-24 text-center">
+        <Loader2 className="w-8 h-8 animate-spin text-[#B7FF5A] mx-auto" />
       </div>
     );
   }
 
   return (
-    <div className="space-y-6 animate-fade-in py-4">
+    <div className="space-y-6 animate-fade-in py-4 max-w-7xl mx-auto">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
-            <GraduationCap className="w-7 h-7 text-brand-600 dark:text-brand-400" />
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#F4F7F2] flex items-center gap-2.5">
+            <GraduationCap className="w-7 h-7 text-[#B7FF5A]" />
             <span>Peer Skill Sharing</span>
           </h1>
-          <p className="text-sm text-slate-500 dark:text-slate-400">
-            Request 1-on-1 peer learning sessions, mentor fellow students, and earn campus reputation
+          <p className="text-sm text-[#A1AAA0] mt-1">
+            Request 1-on-1 peer learning sessions, mentor fellow students, and earn campus reputation.
           </p>
         </div>
 
         {/* Tab Toggle */}
-        <div className="flex rounded-xl bg-slate-100 dark:bg-slate-800 p-1 text-xs font-bold self-start sm:self-auto">
+        <div className="flex rounded-xl bg-[#101310] border border-[#282F28] p-1 text-xs font-semibold self-start sm:self-auto">
           <button
             onClick={() => setActiveTab('sessions')}
-            className={`rounded-lg px-3.5 py-1.5 transition-all ${
+            className={`rounded-lg px-4 py-1.5 transition-all ${
               activeTab === 'sessions'
-                ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-sm'
-                : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
+                ? 'bg-[#1B211B] text-[#B7FF5A] border border-[#282F28] shadow-sm'
+                : 'text-[#70796F] hover:text-[#F4F7F2]'
             }`}
           >
             My Sessions
           </button>
           <button
             onClick={() => setActiveTab('mentors')}
-            className={`rounded-lg px-3.5 py-1.5 transition-all ${
+            className={`rounded-lg px-4 py-1.5 transition-all ${
               activeTab === 'mentors'
-                ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-sm'
-                : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
+                ? 'bg-[#1B211B] text-[#B7FF5A] border border-[#282F28] shadow-sm'
+                : 'text-[#70796F] hover:text-[#F4F7F2]'
             }`}
           >
             Browse Peer Mentors ({mentors.length})
@@ -183,15 +183,15 @@ export const SkillSharing = () => {
         <div className="space-y-8">
           {/* Incoming Mentoring Requests */}
           <div className="space-y-4">
-            <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <h2 className="text-lg font-bold text-[#F4F7F2] flex items-center gap-2">
               <span>Incoming Mentoring Requests</span>
-              <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+              <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-[#1B211B] border border-[#282F28] text-[#B7FF5A]">
                 {providedSessions.length}
               </span>
             </h2>
 
             {providedSessions.length === 0 ? (
-              <div className="p-8 text-center rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 text-xs text-slate-500">
+              <div className="p-8 text-center rounded-2xl bg-[#151915] border border-[#282F28] text-xs text-[#70796F]">
                 No incoming peer learning requests. Add skills to your profile to offer mentorship!
               </div>
             ) : (
@@ -199,19 +199,19 @@ export const SkillSharing = () => {
                 {providedSessions.map((s) => (
                   <div
                     key={s._id}
-                    className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-soft space-y-3"
+                    className="p-5 rounded-2xl bg-[#151915] border border-[#282F28] space-y-3.5"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold px-2.5 py-0.5 rounded-lg bg-brand-50 text-brand-700 dark:bg-brand-950 dark:text-brand-300">
+                      <span className="text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-[#B7FF5A]/10 text-[#B7FF5A] border border-[#B7FF5A]/20">
                         {s.skill}
                       </span>
                       <span
-                        className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                        className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-full border ${
                           s.status === 'accepted'
-                            ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300'
+                            ? 'bg-[#B7FF5A]/10 text-[#B7FF5A] border-[#B7FF5A]/30'
                             : s.status === 'completed'
-                            ? 'bg-purple-100 text-purple-800 dark:bg-purple-950 dark:text-purple-300'
-                            : 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300'
+                            ? 'bg-purple-500/10 text-purple-300 border-purple-500/30'
+                            : 'bg-amber-400/10 text-amber-300 border-amber-400/30'
                         }`}
                       >
                         {s.status.toUpperCase()}
@@ -219,9 +219,9 @@ export const SkillSharing = () => {
                     </div>
 
                     <div>
-                      <h3 className="font-bold text-sm text-slate-900 dark:text-white">{s.topic}</h3>
-                      <p className="text-xs text-slate-500">
-                        Requested by {s.requester?.name} ({s.requester?.college})
+                      <h3 className="font-bold text-sm text-[#F4F7F2]">{s.topic}</h3>
+                      <p className="text-xs text-[#70796F] mt-0.5">
+                        Requested by <span className="text-[#A1AAA0]">{s.requester?.name}</span> ({s.requester?.college})
                       </p>
                     </div>
 
@@ -230,25 +230,25 @@ export const SkillSharing = () => {
                         href={s.meetingLink}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-1 text-xs font-bold text-brand-600 hover:underline"
+                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#B7FF5A] hover:underline"
                       >
                         <ExternalLink className="w-3.5 h-3.5" />
                         <span>Join Video Room</span>
                       </a>
                     )}
 
-                    <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+                    <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-[#282F28]">
                       {s.status === 'requested' && (
                         <>
                           <button
                             onClick={() => handleRespond(s._id, 'rejected')}
-                            className="px-3 py-1.5 text-xs font-bold text-rose-600 hover:bg-rose-50"
+                            className="px-3.5 py-1.5 text-xs font-semibold text-rose-400 hover:bg-rose-500/10 rounded-xl transition-colors border border-rose-500/20"
                           >
                             Decline
                           </button>
                           <button
                             onClick={() => handleRespond(s._id, 'accepted')}
-                            className="px-4 py-1.5 text-xs font-bold bg-brand-600 text-white rounded-xl shadow hover:bg-brand-700"
+                            className="btn-primary px-4 py-1.5 text-xs font-semibold"
                           >
                             Accept Session
                           </button>
@@ -257,7 +257,7 @@ export const SkillSharing = () => {
                       {s.status === 'accepted' && (
                         <button
                           onClick={() => handleComplete(s._id)}
-                          className="px-4 py-1.5 text-xs font-bold bg-emerald-600 text-white rounded-xl shadow hover:bg-emerald-700"
+                          className="btn-primary px-4 py-1.5 text-xs font-semibold"
                         >
                           Mark Completed
                         </button>
@@ -271,15 +271,15 @@ export const SkillSharing = () => {
 
           {/* Outgoing Requests (Sessions I Want to Learn) */}
           <div className="space-y-4">
-            <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <h2 className="text-lg font-bold text-[#F4F7F2] flex items-center gap-2">
               <span>My Requested Learning Sessions</span>
-              <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+              <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-[#1B211B] border border-[#282F28] text-[#B7FF5A]">
                 {requestedSessions.length}
               </span>
             </h2>
 
             {requestedSessions.length === 0 ? (
-              <div className="p-8 text-center rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 text-xs text-slate-500">
+              <div className="p-8 text-center rounded-2xl bg-[#151915] border border-[#282F28] text-xs text-[#70796F]">
                 You haven't requested any peer learning sessions yet.
               </div>
             ) : (
@@ -287,21 +287,21 @@ export const SkillSharing = () => {
                 {requestedSessions.map((s) => (
                   <div
                     key={s._id}
-                    className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-soft space-y-3"
+                    className="p-5 rounded-2xl bg-[#151915] border border-[#282F28] space-y-3"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold px-2.5 py-0.5 rounded-lg bg-indigo-50 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">
+                      <span className="text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-[#1B211B] text-[#B7FF5A] border border-[#282F28]">
                         Skill: {s.skill}
                       </span>
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300">
+                      <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-[#101310] text-[#70796F] border border-[#282F28]">
                         {s.status.toUpperCase()}
                       </span>
                     </div>
 
                     <div>
-                      <h3 className="font-bold text-sm text-slate-900 dark:text-white">{s.topic}</h3>
-                      <p className="text-xs text-slate-500">
-                        Mentor: {s.provider?.name} ({s.provider?.college})
+                      <h3 className="font-bold text-sm text-[#F4F7F2]">{s.topic}</h3>
+                      <p className="text-xs text-[#70796F] mt-0.5">
+                        Mentor: <span className="text-[#A1AAA0]">{s.provider?.name}</span> ({s.provider?.college})
                       </p>
                     </div>
 
@@ -310,7 +310,7 @@ export const SkillSharing = () => {
                         href={s.meetingLink}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-1 text-xs font-bold text-brand-600 hover:underline"
+                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#B7FF5A] hover:underline"
                       >
                         <ExternalLink className="w-3.5 h-3.5" />
                         <span>Join Meeting Room</span>
@@ -330,24 +330,24 @@ export const SkillSharing = () => {
           {mentors.map((m) => (
             <div
               key={m._id}
-              className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-soft flex flex-col justify-between"
+              className="p-5 rounded-2xl bg-[#151915] border border-[#282F28] hover:border-[#384238] transition-all flex flex-col justify-between"
             >
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-2xl bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-300 font-bold flex items-center justify-center uppercase">
+                  <div className="h-10 w-10 rounded-xl bg-[#1B211B] border border-[#282F28] text-[#B7FF5A] font-bold flex items-center justify-center uppercase text-sm">
                     {m.name.charAt(0)}
                   </div>
                   <div>
-                    <h3 className="font-bold text-sm text-slate-900 dark:text-white">{m.name}</h3>
-                    <p className="text-xs text-slate-500">{m.college}</p>
+                    <h3 className="font-bold text-sm text-[#F4F7F2]">{m.name}</h3>
+                    <p className="text-xs text-[#70796F]">{m.college}</p>
                   </div>
                 </div>
 
-                <div className="flex flex-wrap gap-1">
+                <div className="flex flex-wrap gap-1.5">
                   {(m.skills || []).slice(0, 4).map((sk) => (
                     <span
                       key={sk}
-                      className="text-[10px] font-semibold px-2 py-0.5 rounded bg-brand-50 text-brand-700 dark:bg-brand-950 dark:text-brand-300"
+                      className="text-[10px] font-mono font-medium px-2 py-0.5 rounded bg-[#101310] text-[#A1AAA0] border border-[#282F28]"
                     >
                       {sk}
                     </span>
@@ -355,10 +355,10 @@ export const SkillSharing = () => {
                 </div>
               </div>
 
-              <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800">
+              <div className="mt-4 pt-3.5 border-t border-[#282F28]">
                 <button
                   onClick={() => openRequestModal(m)}
-                  className="w-full rounded-xl bg-brand-600 py-2 text-xs font-bold text-white hover:bg-brand-700 shadow"
+                  className="w-full btn-primary py-2 text-xs font-semibold"
                 >
                   Request Session
                 </button>
@@ -376,13 +376,13 @@ export const SkillSharing = () => {
       >
         <form onSubmit={handleRequestSession} className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-xs font-semibold text-[#A1AAA0] mb-1.5">
               Select Skill
             </label>
             <select
               value={selectedSkill}
               onChange={(e) => setSelectedSkill(e.target.value)}
-              className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-2.5 text-sm text-slate-800 dark:text-slate-200 focus:outline-none"
+              className="input-surface w-full p-2.5 text-xs rounded-xl"
             >
               {(selectedMentor?.skills || []).map((sk) => (
                 <option key={sk} value={sk}>
@@ -393,7 +393,7 @@ export const SkillSharing = () => {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-xs font-semibold text-[#A1AAA0] mb-1.5">
               Topic or Challenge *
             </label>
             <input
@@ -402,19 +402,19 @@ export const SkillSharing = () => {
               value={topic}
               onChange={(e) => setTopic(e.target.value)}
               placeholder="e.g. Setting up Docker compose or understanding React hooks"
-              className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-2.5 text-sm text-slate-800 dark:text-slate-200 focus:outline-none"
+              className="input-surface w-full p-2.5 text-xs rounded-xl"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+              <label className="block text-xs font-semibold text-[#A1AAA0] mb-1.5">
                 Duration
               </label>
               <select
                 value={duration}
                 onChange={(e) => setDuration(parseInt(e.target.value, 10))}
-                className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-2.5 text-sm text-slate-800 dark:text-slate-200 focus:outline-none"
+                className="input-surface w-full p-2.5 text-xs rounded-xl"
               >
                 <option value={30}>30 mins</option>
                 <option value={45}>45 mins</option>
@@ -423,7 +423,7 @@ export const SkillSharing = () => {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+              <label className="block text-xs font-semibold text-[#A1AAA0] mb-1.5">
                 Preferred Time
               </label>
               <input
@@ -431,23 +431,23 @@ export const SkillSharing = () => {
                 value={preferredTime}
                 onChange={(e) => setPreferredTime(e.target.value)}
                 placeholder="e.g. Friday afternoon"
-                className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-2.5 text-sm text-slate-800 dark:text-slate-200 focus:outline-none"
+                className="input-surface w-full p-2.5 text-xs rounded-xl"
               />
             </div>
           </div>
 
-          <div className="flex justify-end gap-2 pt-2">
+          <div className="flex justify-end gap-2.5 pt-3 border-t border-[#282F28]">
             <button
               type="button"
               onClick={() => setIsModalOpen(false)}
-              className="rounded-xl px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100"
+              className="px-4 py-2 text-xs font-semibold text-[#70796F] hover:text-[#F4F7F2] transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={submitting}
-              className="rounded-xl bg-brand-600 px-5 py-2 text-xs font-bold text-white hover:bg-brand-700 disabled:opacity-50"
+              className="btn-primary px-5 py-2 text-xs font-semibold disabled:opacity-50"
             >
               {submitting ? 'Sending...' : 'Send Request'}
             </button>

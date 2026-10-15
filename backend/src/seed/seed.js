@@ -11,10 +11,7 @@ import { Review } from '../models/Review.js';
 import { Notification } from '../models/Notification.js';
 import { connectDB, closeDB } from '../config/db.js';
 
-const seedDatabase = async () => {
-  try {
-    console.log('🌱 Starting Git Together database seed process...');
-    await connectDB();
+export const seedData = async () => {
 
     // Clear existing collections
     console.log('🧹 Clearing existing collections...');
@@ -600,14 +597,26 @@ const seedDatabase = async () => {
     console.log('3. Student: priya@stanford.edu (Password: Password123!)');
     console.log('4. Student: marcus@berkeley.edu(Password: Password123!)');
     console.log('==================================================\n');
-
-    await closeDB();
-    process.exit(0);
-  } catch (err) {
-    console.error('❌ Error during seeding:', err);
-    await closeDB();
-    process.exit(1);
-  }
 };
 
-seedDatabase();
+const isDirectExecution = process.argv[1] && (
+  process.argv[1].endsWith('seed.js') || process.argv[1].endsWith('seed')
+);
+
+if (isDirectExecution) {
+  (async () => {
+    try {
+      console.log('🌱 Starting Git Together database seed process...');
+      await connectDB();
+      await seedData();
+      await closeDB();
+      process.exit(0);
+    } catch (err) {
+      console.error('❌ Error during seeding:', err);
+      await closeDB();
+      process.exit(1);
+    }
+  })();
+}
+
+export default seedData;

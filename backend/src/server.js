@@ -14,6 +14,17 @@ const startServer = async () => {
   try {
     await connectDB();
 
+    // In development mode, auto-populate demo campus dataset if database is empty
+    if (ENV.NODE_ENV !== 'production') {
+      const { User } = await import('./models/User.js');
+      const userCount = await User.countDocuments();
+      if (userCount === 0) {
+        console.log('🌱 Empty database detected on startup. Populating sample campus data and demo accounts...');
+        const { seedData } = await import('./seed/seed.js');
+        await seedData();
+      }
+    }
+
     server.listen(ENV.PORT, () => {
       console.log(`\n==================================================`);
       console.log(`🚀 Git Together Backend Server running in [${ENV.NODE_ENV}] mode`);

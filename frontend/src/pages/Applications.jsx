@@ -58,56 +58,61 @@ export const Applications = () => {
 
   if (loading) {
     return (
-      <div className="py-12 text-center">
-        <Loader2 className="w-8 h-8 animate-spin text-brand-600 mx-auto" />
+      <div className="py-24 text-center">
+        <Loader2 className="w-8 h-8 animate-spin text-[#B7FF5A] mx-auto" />
       </div>
     );
   }
 
   return (
-    <div className="space-y-8 animate-fade-in py-4">
+    <div className="space-y-8 animate-fade-in py-4 max-w-7xl mx-auto">
       <div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
-          <Inbox className="w-7 h-7 text-brand-600 dark:text-brand-400" />
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-[#F4F7F2] flex items-center gap-2.5">
+          <Inbox className="w-7 h-7 text-[#B7FF5A]" />
           <span>Applications & Invitations</span>
         </h1>
-        <p className="text-sm text-slate-500 dark:text-slate-400">
-          Track the status of your project applications and manage team membership requests
+        <p className="text-sm text-[#A1AAA0] mt-1">
+          Track the status of your project applications and manage incoming team membership invitations.
         </p>
       </div>
 
       {/* Invitations Section */}
       {invitations.length > 0 && (
-        <div className="p-6 rounded-3xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 space-y-4">
-          <h2 className="text-base font-bold text-emerald-900 dark:text-emerald-200 flex items-center gap-2">
-            <Users className="w-5 h-5 text-emerald-600" />
-            <span>Pending Team Invitations ({invitations.length})</span>
-          </h2>
+        <div className="p-6 rounded-2xl bg-[#151915] border border-[#B7FF5A]/30 shadow-lg shadow-[#B7FF5A]/5 space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-base font-bold text-[#F4F7F2] flex items-center gap-2">
+              <Users className="w-5 h-5 text-[#B7FF5A]" />
+              <span>Pending Team Invitations ({invitations.length})</span>
+            </h2>
+            <span className="text-xs font-mono text-[#B7FF5A] bg-[#B7FF5A]/10 px-2 py-0.5 rounded-full border border-[#B7FF5A]/20">
+              Action Required
+            </span>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {invitations.map((inv) => (
               <div
                 key={inv._id}
-                className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-emerald-100 dark:border-emerald-900/40 shadow-sm space-y-3"
+                className="p-5 rounded-xl bg-[#101310] border border-[#282F28] space-y-3"
               >
                 <div>
-                  <h3 className="font-bold text-sm text-slate-900 dark:text-white">
+                  <h3 className="font-bold text-sm text-[#F4F7F2]">
                     {inv.team?.name}
                   </h3>
-                  <p className="text-xs text-slate-500">
-                    Invited by {inv.inviter?.name} ({inv.inviter?.college})
+                  <p className="text-xs text-[#70796F] mt-0.5">
+                    Invited by <span className="text-[#A1AAA0] font-medium">{inv.inviter?.name}</span> ({inv.inviter?.college})
                   </p>
                 </div>
-                <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+                <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-[#282F28]">
                   <button
                     onClick={() => handleRespondInvitation(inv._id, 'declined')}
-                    className="px-3 py-1.5 text-xs font-bold text-rose-600 hover:bg-rose-50"
+                    className="px-3.5 py-1.5 text-xs font-semibold text-rose-400 hover:bg-rose-500/10 rounded-xl transition-colors border border-rose-500/20"
                   >
                     Decline
                   </button>
                   <button
                     onClick={() => handleRespondInvitation(inv._id, 'accepted')}
-                    className="px-4 py-1.5 text-xs font-bold bg-emerald-600 text-white rounded-xl shadow hover:bg-emerald-700"
+                    className="btn-primary px-4 py-1.5 text-xs font-semibold"
                   >
                     Accept & Join
                   </button>
@@ -120,17 +125,20 @@ export const Applications = () => {
 
       {/* Submitted Applications List */}
       <div className="space-y-4">
-        <h2 className="text-lg font-bold text-slate-900 dark:text-white">
-          My Submitted Project Applications ({applications.length})
-        </h2>
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-bold text-[#F4F7F2]">
+            My Submitted Applications ({applications.length})
+          </h2>
+          <span className="text-xs text-[#70796F] font-mono">Real-time status tracking</span>
+        </div>
 
         {applications.length === 0 ? (
-          <div className="p-12 text-center rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 space-y-2">
-            <p className="text-sm font-semibold text-slate-600 dark:text-slate-300">
+          <div className="p-12 text-center rounded-2xl bg-[#151915] border border-[#282F28] space-y-3">
+            <p className="text-sm font-medium text-[#A1AAA0]">
               You haven't submitted any project applications yet.
             </p>
-            <Link to="/projects" className="text-xs text-brand-600 font-bold hover:underline">
-              Explore available projects →
+            <Link to="/projects" className="inline-block text-xs font-semibold text-[#B7FF5A] hover:underline">
+              Explore available projects & open positions →
             </Link>
           </div>
         ) : (
@@ -138,41 +146,41 @@ export const Applications = () => {
             {applications.map((app) => (
               <div
                 key={app._id}
-                className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-soft flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                className="p-5 rounded-2xl bg-[#151915] border border-[#282F28] hover:border-[#384238] transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-4"
               >
-                <div className="space-y-1 max-w-xl">
+                <div className="space-y-1.5 max-w-xl">
                   <div className="flex items-center gap-2">
                     <Link
                       to={`/projects/${app.project?._id}`}
-                      className="font-bold text-base text-slate-900 dark:text-white hover:text-brand-600 dark:hover:text-brand-400"
+                      className="font-bold text-base text-[#F4F7F2] hover:text-[#B7FF5A] transition-colors"
                     >
                       {app.project?.title || 'Project'}
                     </Link>
                   </div>
-                  <p className="text-xs text-slate-500">
-                    Applied for: <strong className="text-slate-700 dark:text-slate-300">{app.role}</strong> •{' '}
-                    {new Date(app.createdAt).toLocaleDateString()}
+                  <p className="text-xs text-[#70796F]">
+                    Role applied: <strong className="text-[#A1AAA0]">{app.role}</strong> •{' '}
+                    <span className="font-mono">{new Date(app.createdAt).toLocaleDateString()}</span>
                   </p>
-                  <p className="text-xs text-slate-600 dark:text-slate-400 italic">
+                  <p className="text-xs text-[#A1AAA0] italic bg-[#101310] p-3 rounded-xl border border-[#282F28]/60">
                     "{app.pitch}"
                   </p>
                   {app.feedback && (
-                    <div className="mt-2 text-xs p-2 rounded-lg bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
-                      <strong>Lead Feedback:</strong> {app.feedback}
+                    <div className="mt-2 text-xs p-2.5 rounded-xl bg-[#1B211B] border border-[#282F28] text-[#F4F7F2]">
+                      <strong className="text-[#B7FF5A]">Lead Feedback:</strong> {app.feedback}
                     </div>
                   )}
                 </div>
 
                 <div className="flex items-center gap-3 self-end sm:self-center">
                   <span
-                    className={`text-xs font-bold px-3 py-1 rounded-full ${
+                    className={`text-xs font-mono font-bold px-3 py-1 rounded-full border ${
                       app.status === 'accepted'
-                        ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300'
+                        ? 'bg-[#B7FF5A]/10 text-[#B7FF5A] border-[#B7FF5A]/30'
                         : app.status === 'rejected'
-                        ? 'bg-rose-100 text-rose-800 dark:bg-rose-950 dark:text-rose-300'
+                        ? 'bg-rose-500/10 text-rose-400 border-rose-500/30'
                         : app.status === 'withdrawn'
-                        ? 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400'
-                        : 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300'
+                        ? 'bg-[#1B211B] text-[#70796F] border-[#282F28]'
+                        : 'bg-amber-400/10 text-amber-300 border-amber-400/30'
                     }`}
                   >
                     {app.status.toUpperCase()}
@@ -181,7 +189,7 @@ export const Applications = () => {
                   {app.status === 'pending' && (
                     <button
                       onClick={() => handleWithdraw(app._id)}
-                      className="text-xs font-semibold text-rose-600 hover:underline"
+                      className="text-xs font-semibold text-rose-400 hover:text-rose-300 hover:underline px-2 py-1 rounded transition-colors"
                     >
                       Withdraw
                     </button>
